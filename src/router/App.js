@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from '../views/Home';
-import About from '../About';
+import Team from '../views/Team';
 import Contact from '../Contact';
-
+import Product from '../components/Product';
 class App extends Component {
   render() {
     return (
@@ -12,8 +12,8 @@ class App extends Component {
           
           <Switch>
               <Route exact path='/' component={Home} />
-              <Route path='/contact' component={Contact} />
-              <Route path='/about' component={About} />
+              <Route path='/product' component={Product} />
+              <Route path='/team' component={Team} />
           </Switch>
         </div>
       </Router>
