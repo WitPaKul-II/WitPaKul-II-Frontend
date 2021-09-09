@@ -11,7 +11,7 @@ class Product extends Component {
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     {/*dummyimage*/}
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/300x300/" alt="..." /></div>
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                         {/* BRAND NAME */}
                         <div class="mb-1 fw-bolder">BRAND NAME</div>
                         {/* Product */}
@@ -22,11 +22,12 @@ class Product extends Component {
                         <p class="lead">Knowing how to perform a World Flipper reroll will make your first few hours with the game that much easier. Here's how to do it:</p>
                         {/* colors brand index.css */}
                         <div class="d-flex  align-items-center mt-2 mb-2 fw-bolder  "> <span>colors</span>     
-                        <ul>
-                         <li class="yellow"></li>
-                         <li class="black"></li>
-                        <li class="blue"></li>
-                        </ul> </div>
+                          <ul>
+                          <li class="yellow"></li>
+                          <li class="black"></li>
+                          <li class="blue"></li>
+                          </ul> 
+                        </div>
                           {/* price && button */}
                         <div class="fs-5 mb-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
                             <span>$40.00</span>                                                
@@ -40,6 +41,7 @@ class Product extends Component {
             </div>
         </section>
         </div>
+        
     );
   }
 }
