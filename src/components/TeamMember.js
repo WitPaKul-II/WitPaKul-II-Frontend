@@ -31,9 +31,9 @@ class TeamMember extends Component {
                 </div>
                 </div>
             <div class="col-sm-3 m-sm-auto">
-                 <img  class="img-fluid rounded-circle " src="/assets/image/team/090.jpg"/>
-                 <div class="pt-3">
-                 <h2>62130500090</h2>
+                  <img  class="img-fluid rounded-circle " src="/assets/image/team/090.jpg"/>
+                  <div class="pt-3">
+                  <h2>62130500090</h2>
                   <h2>Sakulthip Rassameecharoentham</h2>
                   <h3>OK</h3>
                   </div>
