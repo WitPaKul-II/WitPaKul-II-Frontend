@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Navbar extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light indigo">
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -26,17 +26,29 @@ class Navbar extends Component {
                 loading="lazy"
               />
             </a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-5">
               <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="#">SHOP</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="#">TEAM</a>
               </li>
             </ul>
+          </div>
+
+          <div>
+              <form class="d-flex input-group w-auto px-2">
+                <input
+                  type="search"
+                  class="form-control rounded"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                />
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="fas fa-search"></i>
+                </span>
+              </form>
           </div>
 
           <div class="d-flex align-items-center">
@@ -44,7 +56,7 @@ class Navbar extends Component {
               <i class="fas fa-shopping-cart"></i>
             </a>
 
-            <a
+            {/* <a
               class="text-reset me-3 dropdown-toggle hidden-arrow"
               href="#"
               id="navbarDropdownMenuLink"
@@ -68,10 +80,10 @@ class Navbar extends Component {
               <li>
                 <a class="dropdown-item" href="#">Something else here</a>
               </li>
-            </ul>
+            </ul> */}
 
             <a
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              class="dropdown-toggle d-flex align-items-center hidden-arrow px-2"
               href="#"
               id="navbarDropdownMenuLink"
               role="button"

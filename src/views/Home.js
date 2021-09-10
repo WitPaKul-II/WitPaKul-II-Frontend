@@ -8,8 +8,8 @@ class Home extends Component {
     return (
 
       <div>
-        <SlideHome />
         <Navbar />
+        <SlideHome />
         <div>
           <section class="fdb-block pt-5">
             <div class="container">
