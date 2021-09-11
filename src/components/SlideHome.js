@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 class SlideHome extends Component {
   render() {
     return (
-
-
       <div id="carouselslidehome" class="carousel slide" data-mdb-ride="carousel">
 
         <div class="carousel-indicators">

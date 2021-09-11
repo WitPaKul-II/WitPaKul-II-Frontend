@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import SlideHome from '../components/SlideHome';
+import Footerbar from '../components/Footerbar';
 
 class Home extends Component {
   render() {
@@ -100,6 +101,7 @@ class Home extends Component {
             </div>
           </section>
         </div>
+        <Footerbar />
       </div>
 
     );
