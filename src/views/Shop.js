@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import Navbar  from '../components/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ProductItems from '../components/ProductItems';
 import Footerbar from '../components/Footerbar';
