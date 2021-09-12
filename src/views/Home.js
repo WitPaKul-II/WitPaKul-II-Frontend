@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import SlideHome from '../components/SlideHome';
+import Navbar from '../components/Navbar';
 
 class Home extends Component {
   render() {
     return (
 
       <div>
+        <Navbar />
         <SlideHome />
-        <div>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="navbar-nav mr-auto">
-              <li><Link to={'/team'} className="nav-link">Team</Link></li>
-              <li><Link to={'/product'} className="nav-link">Product</Link></li>
-            </ul>
-          </nav>
-        </div>
-
         <div>
           <section class="fdb-block pt-5">
             <div class="container">
