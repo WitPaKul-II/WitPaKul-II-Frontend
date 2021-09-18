@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Counter } from '../test/counter/Counter'; // TODO: remove when develop
 import SlideHome from '../components/SlideHome';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
@@ -9,7 +10,7 @@ class Home extends Component {
         {/* <Counter /> */}
         <SlideHome />
         {/* Don't delete it because it will be used.  */}
-        {/* <div>
+        <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
               <li><Link to={'/team'} className="nav-link">Team</Link></li>
@@ -17,7 +18,8 @@ class Home extends Component {
               <li><Link to={'/signin'} className="nav-link">Signin</Link></li>
             </ul>
           </nav>
-        </div> */}       
+        </div> 
+              
         <div>
           <section class="fdb-block pt-5">
             <div class="container">
