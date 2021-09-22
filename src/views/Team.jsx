@@ -4,10 +4,9 @@ import TeamMember from '../components/TeamMember';
 class Team extends Component {
   render() {
     return (
-
-        <div>
-          <TeamMember/>
-        </div>
+      <div>
+        <TeamMember />
+      </div>
     );
   }
 }
