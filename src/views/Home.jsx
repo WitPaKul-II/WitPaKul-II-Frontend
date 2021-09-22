@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import SlideHome from '../components/SlideHome';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <SlideHome />      
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <ul className="navbar-nav mr-auto">
+              <li><Link to={'/team'} className="nav-link">Team</Link></li>
+            </ul>
+          </nav>
+        </div>
+        <SlideHome />
+              
         <div>
           <section class="fdb-block pt-5">
             <div class="container">
