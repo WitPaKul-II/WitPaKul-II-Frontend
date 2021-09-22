@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import { Counter } from '../test/counter/Counter'; // TODO: remove when develop
 import SlideHome from '../components/SlideHome';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        {/* <Counter /> */}
-        <SlideHome />
-        {/* Don't delete it because it will be used.  */}
         <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
               <li><Link to={'/team'} className="nav-link">Team</Link></li>
-              <li><Link to={'/product'} className="nav-link">Product</Link></li>
-              <li><Link to={'/signin'} className="nav-link">Signin</Link></li>
             </ul>
           </nav>
-        </div> 
+        </div>
+        <SlideHome />
               
         <div>
           <section class="fdb-block pt-5">
