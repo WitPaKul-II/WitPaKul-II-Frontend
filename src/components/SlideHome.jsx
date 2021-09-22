@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from
-  "mdbreact";
+import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
 
 class SlideHome extends Component {
   render() {
     return (
-
       <MDBContainer>
         <MDBCarousel
           activeItem={1}
@@ -33,7 +31,6 @@ class SlideHome extends Component {
           </MDBCarouselInner>
         </MDBCarousel>
       </MDBContainer>
-
     );
   }
 }
