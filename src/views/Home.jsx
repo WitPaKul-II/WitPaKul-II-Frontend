@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import SlideHome from '../components/SlideHome';
+import Footerbar from '../components/Footerbar';
 
 class Home extends Component {
   render() {
@@ -48,6 +49,8 @@ class Home extends Component {
             </div>
           </section>
         </div>
+        
+        <Footerbar />
       </div>
     );
   }
