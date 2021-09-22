@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Team from './views/Team';
+import Shop from './views/Shop';
 import Product from './views/Product';
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -15,6 +16,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/team' component={Team} />
+            <Route path='/shop' component={Shop} />
             <Route path='/product/*' component={Product} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
