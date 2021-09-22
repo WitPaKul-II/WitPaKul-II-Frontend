@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Team from './views/Team';
-import Product from './components/Product';
-
+import Product from './views/Product';
 
 class App extends Component {
   render() {
