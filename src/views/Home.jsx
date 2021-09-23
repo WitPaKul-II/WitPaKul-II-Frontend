@@ -15,7 +15,7 @@ class Home extends Component {
             <div class="container">
               <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-5 text-center pb-md-5 ">
-                  <h1>Witpakul Shop</h1>
+                  <h1>Witpakul Shop II</h1>
                   <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                 </div>
               </div>
