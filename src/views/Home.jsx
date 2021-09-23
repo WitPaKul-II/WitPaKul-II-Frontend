@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Counter } from '../test/counter/Counter'; // TODO: remove when develop
 import SlideHome from '../components/SlideHome';
-import { BrowserRouter as  Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
