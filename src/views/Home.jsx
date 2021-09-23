@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
+import Navbar from '../components/Navbar';
 import SlideHome from '../components/SlideHome';
-import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <div>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="navbar-nav mr-auto">
-              <li><Link to={'/team'} className="nav-link">Team</Link></li>
-              <li><Link to={'/signin'} className="nav-link">Sign In</Link></li>
-              <li><Link to={'/signup'} className="nav-link">Sign Up</Link></li>
-            </ul>
-          </nav>
-        </div>
+        <Navbar />
         <SlideHome />
               
         <div>
