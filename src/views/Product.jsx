@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
+import Footerbar from '../components/Footerbar';
 
 class Product extends Component {
   render() {
@@ -39,6 +40,7 @@ class Product extends Component {
             </div>
           </div>
         </section>
+        <Footerbar />
       </div>
     );
   }
