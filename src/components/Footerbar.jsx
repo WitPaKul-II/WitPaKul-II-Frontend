@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBIcon, MDBBtn, MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { MDBContainer, MDBFooter } from "mdbreact";
 
 class Footerbar extends Component {
   render() {
