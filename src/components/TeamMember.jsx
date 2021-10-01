@@ -19,7 +19,7 @@ class TeamMember extends Component {
                   <div class="pt-3 ">
                     <h2>62130500074</h2>
                     <h2>Pawat Munkong</h2>
-                    <h3>OK</h3>
+                    <h3>Roles : Front-end , Back-end</h3>
                   </div>
                 </div>
                 <div class="col-sm-3 m-sm-auto">
@@ -27,7 +27,7 @@ class TeamMember extends Component {
                   <div class="pt-3 ">
                     <h2>62130500082</h2>
                     <h2>Worawit Makkasan</h2>
-                    <h3>OK</h3>
+                    <h3>Roles : Back-end , Database , DevOps</h3>
                   </div>
                 </div>
                 <div class="col-sm-3 m-sm-auto">
@@ -35,7 +35,7 @@ class TeamMember extends Component {
                   <div class="pt-3">
                     <h2>62130500090</h2>
                     <h2>Sakulthip Rassameecharoentham</h2>
-                    <h3>OK</h3>
+                    <h3> Roles : Front-end , Database</h3>
                   </div>
                 </div>
               </div>
