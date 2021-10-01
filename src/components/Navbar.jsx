@@ -3,7 +3,6 @@ import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
   MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBFormInline
 } from "mdbreact";
-import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   state = {
@@ -40,9 +39,8 @@ class Navbar extends Component {
                     <MDBIcon icon="user" />
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
-                    <Link to="signin"><MDBDropdownItem>Login</MDBDropdownItem></Link>
+                    <MDBNavLink to="signin"><MDBDropdownItem>Login</MDBDropdownItem></MDBNavLink>
                     <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                    <MDBDropdownItem href="#!">Logout</MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavItem>
