@@ -16,7 +16,7 @@ class Home extends Component {
               <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-5 text-center pb-md-5 ">
                   <h1>Witpakul Shop</h1>
-                  <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                  <p class="lead">It is an E-commerce website that sells products. Customers or interested people can come and shop on the web.</p>
                 </div>
               </div>
             </div>
@@ -30,19 +30,19 @@ class Home extends Component {
                 <div class="col-12 col-md-8 m-auto col-lg-4">
                   <div class="fdb-box fdb-touch">
                     <h2>Step 1</h2>
-                    <p>Far far away, behind the word mountains, far from the country Vokalia, there live the blind texts.</p>
+                    <p>You can go to the team page and the shop page to see the product details as needed. </p>
                   </div>
                 </div>
                 <div class="col-12 col-md-8 m-auto col-lg-4 pt-5 pt-lg-0">
                   <div class="fdb-box fdb-touch">
                     <h2>Step 2</h2>
-                    <p>Separated they live in Bookmarks right at the coast of the Semantics, a large language ocean.</p>
+                    <p>You can login to become a member and you can edit your own account. </p>
                   </div>
                 </div>
                 <div class="col-12 col-md-8 m-auto col-lg-4 pt-5 pt-lg-0">
                   <div class="fdb-box fdb-touch ">
                     <h2>Step 3</h2>
-                    <p>A small river named Duden flows by their small place and supplies it with the necessary regelialia.</p>
+                    <p>Only admin can add products or delete and edit products. </p>
                   </div>
                 </div>
               </div>

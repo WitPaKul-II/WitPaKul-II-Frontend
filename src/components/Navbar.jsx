@@ -19,7 +19,7 @@ class Navbar extends Component {
         <MDBNavbar color="default-color" dark expand="md">
           <MDBNavbarBrand>
             <MDBNavLink to="/">
-              <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" style={{ height: "15px" }} alt="" loading="lazy" />
+              <img src="assets/image/Among2.png" style={{ height: "35px" }} alt="" loading="lazy" />
             </MDBNavLink>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -34,23 +34,22 @@ class Navbar extends Component {
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
-                <MDBFormInline waves>
-                  <div className="md-form my-0">
-                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                  </div>
-                </MDBFormInline>
-              </MDBNavItem>
-              <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" />
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
-                    <MDBDropdownItem href="#!">My profile</MDBDropdownItem>
+                    <MDBNavLink to="signin"><MDBDropdownItem>Login</MDBDropdownItem></MDBNavLink>
                     <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                    <MDBDropdownItem href="#!">Logout</MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBFormInline waves>
+                  <div className="md-form my-0">
+                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+                  </div>
+                </MDBFormInline>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

@@ -15,17 +15,17 @@ class SlideHome extends Component {
           <MDBCarouselInner>
             <MDBCarouselItem itemId="1">
               <MDBView>
-                <img src="https://dummyimage.com/1600x500/" class="d-block w-100 " alt="..." />
+                <img src="assets/image/Picture1.png" class="d-block w-100 " alt="..." />
               </MDBView>
             </MDBCarouselItem>
             <MDBCarouselItem itemId="2">
               <MDBView>
-                <img src="https://dummyimage.com/1600x500/" class="d-block w-100 " alt="..." />
+                <img src="assets/image/Picture2.png" class="d-block w-100 " alt="..." />
               </MDBView>
             </MDBCarouselItem>
             <MDBCarouselItem itemId="3">
               <MDBView>
-                <img src="https://dummyimage.com/1600x500/" class="d-block w-100 " alt="..." />
+                <img src="assets/image/Picture3.png" class="d-block w-100 " alt="..." />
               </MDBView>
             </MDBCarouselItem>
           </MDBCarouselInner>
