@@ -4,6 +4,8 @@ services:
     container_name: WitPaKul_FrontEnd
     build: .
     image: frontend
+    expose:
+      - "80"
 networks:
    default:
      external:
