@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: WitPaKul_FrontEnd
+    build: .
+    image: frontend
+    ports:
+      - "80:80"
+networks:
+   default:
+     external:
+         name: witpakul_network
