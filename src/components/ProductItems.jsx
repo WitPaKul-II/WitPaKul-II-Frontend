@@ -11,9 +11,9 @@ class ProductItems extends Component {
     };
   }
   componentDidMount() {
-    const product_url = 'http://168.63.213.234:4000/findAll/product';
+    const product_url = 'http://backend/findAll/product';
     axios.get(product_url).then(items_res => {
-      const product_images_url = 'http://168.63.213.234:4000/productImages/findAll/';
+      const product_images_url = 'http://backend/productImages/findAll/';
       axios.get(product_images_url).then(product_images_res => {
         // Set product code to string
         for(var i = 0; i < product_images_res.data.length; i++) {
