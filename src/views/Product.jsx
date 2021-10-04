@@ -23,14 +23,14 @@ class Product extends Component {
     };
   }
   componentDidMount() {
-    const url = 'http://168.63.213.234:4000/productcode/' + this.props.match.params[0];
+    const url = 'http://witpakulii.ddns.net/backendproductcode/' + this.props.match.params[0];
     axios.get(url).then(res => {
       var selectedColors = {}
       for (var i=0; i<res.data.colors.length; i++) {
         selectedColors[res.data.colors[i].color_name] = false;
       }
 
-      const product_images_url = 'http://168.63.213.234:4000/productImages/findAll/';
+      const product_images_url = 'http://witpakulii.ddns.net/backendproductImages/findAll/';
       axios.get(product_images_url).then(product_images_res => {
         // Set product code to string
         for(var i = 0; i < product_images_res.data.length; i++) {
