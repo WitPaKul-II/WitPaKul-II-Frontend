@@ -84,7 +84,7 @@ class Product extends Component {
     )
     if (data.images.length !== 0) {
       images_comp = (
-      <img class="card-img-top mb-5 mb-md-0" src={"http://witpakulii.ddns.net/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
+      <img class="card-img-top mb-5 mb-md-0" src={"http://shops.witpakulii.de/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
       )
     }
     return (
