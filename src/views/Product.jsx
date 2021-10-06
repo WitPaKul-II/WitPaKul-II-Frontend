@@ -22,6 +22,7 @@ class Product extends Component {
       selectedColors: []
     };
   }
+  // fiximagespath
   componentDidMount() {
     const url = 'http://witpakulii.ddns.net/backendproductcode/' + this.props.match.params[0];
     axios.get(url).then(res => {
