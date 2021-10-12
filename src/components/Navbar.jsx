@@ -20,6 +20,7 @@ class Navbar extends Component {
           <MDBNavbarBrand>
             <MDBNavLink to="/">
               <img src="assets/image/Among2.png" style={{ height: "35px" }} alt="" loading="lazy" />
+              <img src="/assets/image/Among2.png" style={{ height: "35px" }} alt="" loading="lazy" />
             </MDBNavLink>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
