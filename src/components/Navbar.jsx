@@ -6,28 +6,33 @@ import {
 
 class Navbar extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    searchText: ''
   };
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  handleSearchChange = (event) =>  {
+    this.setState({ searchText: event.target.value });
+    if (this.props.onChange) {
+      this.props.onChange(event);
+    }
+  }
+
   render() {
-    console.log(this.props.search);
+    var search = <div/>
     if (this.props.search) {
-      var search = (
+      search = (
         <MDBNavItem >
           <MDBFormInline waves>
             <div className="md-form my-0">
-              <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+              <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value={this.state.searchText} onChange={this.handleSearchChange} />
             </div>
           </MDBFormInline>
         </MDBNavItem>
       );
-    }
-    else {
-      var search = <MDBNavItem/>
     }
     return (
       <div>
