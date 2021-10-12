@@ -7,7 +7,7 @@ class Shop extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar search={true}/>
         <ProductItems />
         <Footerbar />
       </div>
