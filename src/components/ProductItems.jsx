@@ -11,9 +11,9 @@ class ProductItems extends Component {
     };
   }
   componentDidMount() {
-    const product_url = 'http://witpakulii.ddns.net/backendfindAll/product';
+    const product_url = 'http://shops.witpakulii.de/backendfindAll/product';
     axios.get(product_url).then(items_res => {
-      const product_images_url = 'http://witpakulii.ddns.net/backendproductImages/findAll/';
+      const product_images_url = 'http://shops.witpakulii.de/backendproductImages/findAll/';
       axios.get(product_images_url).then(product_images_res => {
         // Set product code to string
         for(var i = 0; i < product_images_res.data.length; i++) {

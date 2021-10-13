@@ -23,14 +23,14 @@ class Product extends Component {
     };
   }
   componentDidMount() {
-    const url = 'http://witpakulii.ddns.net/backendproductcode/' + this.props.match.params[0];
+    const url = 'http://shops.witpakulii.de/backendproductcode/' + this.props.match.params[0];
     axios.get(url).then(res => {
       var selectedColors = {}
       for (var i=0; i<res.data.colors.length; i++) {
         selectedColors[res.data.colors[i].color_name] = false;
       }
 
-      const product_images_url = 'http://witpakulii.ddns.net/backendproductImages/findAll/';
+      const product_images_url = 'http://shops.witpakulii.de/backendproductImages/findAll/';
       axios.get(product_images_url).then(product_images_res => {
         // Set product code to string
         for(var i = 0; i < product_images_res.data.length; i++) {
@@ -84,7 +84,7 @@ class Product extends Component {
     )
     if (data.images.length !== 0) {
       images_comp = (
-      <img class="card-img-top mb-5 mb-md-0" src={"http://witpakulii.ddns.net/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
+      <img class="card-img-top mb-5 mb-md-0" src={"http://shops.witpakulii.de/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
       )
     }
     return (

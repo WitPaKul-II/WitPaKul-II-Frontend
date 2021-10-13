@@ -10,7 +10,7 @@ class ProductItem extends Component {
         <div class="card">
           <MDBNavLink to={"/product/" + this.props.data.product_code}>
             <div class="view overlay">
-              <img src={"http://witpakulii.ddns.net/backendimages/" + this.props.data.images[0].substring(this.props.data.images[0].lastIndexOf('/')+1, this.props.data.images[0].length)} class="card-img-top" alt="" />
+              <img src={"http://shops.witpakulii.de/backendimages/" + this.props.data.images[0].substring(this.props.data.images[0].lastIndexOf('/')+1, this.props.data.images[0].length)} class="card-img-top" alt="" />
               <div class="mask rgba-white-slight"></div>
             </div>
             <div class="card-body text-center">
