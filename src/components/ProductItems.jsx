@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { MDBContainer } from 'mdbreact';
 import ProductItem from '../components/ProductItem';
+import ProductItemAdd from '../components/ProductItemAdd';
 
 class ProductItems extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class ProductItems extends Component {
         <div class="p-5">
           <section class="text-center mb-4">
             <div class="row wow fadeIn">
+            <ProductItemAdd />
               {
                 Object.keys(items).map(key => (
                   <ProductItem data={items[key]} />
