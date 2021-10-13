@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
 import { MDBBtn, MDBInput } from 'mdbreact';
+import DatePicker from 'react-datepicker';
 
 class Product extends Component {
   constructor(props) {
@@ -20,9 +21,41 @@ class Product extends Component {
         "images": [] 
       },
       imageFile: null,
+      brands: [],
       selectedColors: []
     };
+    this.handleBrandChange = this.handleBrandChange.bind(this)
+    this.handleProductNameChange = this.handleProductNameChange.bind(this)
+    this.handleManufacturedDateChange = this.handleManufacturedDateChange.bind(this)
+    this.handleProductDescriptionChange = this.handleProductDescriptionChange.bind(this)
+    this.handlePriceChange = this.handlePriceChange.bind(this)
     this.handleImageFileChange = this.handleImageFileChange.bind(this)
+  }
+  handleBrandChange(event) {
+    var { data } = this.state;
+    data.brand.brand_id = event.target.value
+    data.brand.brand_name = event.target[event.target.selectedIndex].text
+    this.setState({data: data})
+  }
+  handleProductNameChange(event) {
+    var { data } = this.state
+    data.product_name = event.target.value
+    this.setState({data: data})
+  }
+  handleManufacturedDateChange(value) {
+    var { data } = this.state
+    data.manufactured_date = value
+    this.setState({data: data})
+  }
+  handleProductDescriptionChange(event) {
+    var { data } = this.state
+    data.product_description = event.target.value
+    this.setState({data: data})
+  }
+  handlePriceChange(event) {
+    var { data } = this.state
+    data.price = event.target.value
+    this.setState({data: data})
   }
   handleImageFileChange(event) {
     this.setState({imageFile: URL.createObjectURL(event.target.files[0])})
@@ -39,40 +72,54 @@ class Product extends Component {
     return ((selectedColors[color_name]) ?'active':'default');
   }
   componentDidMount() {
-    const url = 'http://shops.witpakulii.de/backendproductcode/' + this.props.match.params[0];
-    axios.get(url).then(res => {
-      var selectedColors = {}
-      for (var i=0; i<res.data.colors.length; i++) {
-        selectedColors[res.data.colors[i].color_name] = false;
-      }
+    // const url = 'http://shops.witpakulii.de/backendproductcode/' + this.props.match.params[0];
+    // axios.get(url).then(res => {
+    //   var selectedColors = {}
+    //   for (var i=0; i<res.data.colors.length; i++) {
+    //     selectedColors[res.data.colors[i].color_name] = false;
+    //   }
+    //   const product_images_url = 'http://shops.witpakulii.de/backendproductImages/findAll/';
+    //   axios.get(product_images_url).then(product_images_res => {
+    //     // Set product code to string
+    //     for(var i = 0; i < product_images_res.data.length; i++) {
+    //       product_images_res.data[i].product_code = product_images_res.data[i].product_code.product_code
+    //     }
+    //     // Initial images to each item
+    //     res.data.images = []
 
-      const product_images_url = 'http://shops.witpakulii.de/backendproductImages/findAll/';
-      axios.get(product_images_url).then(product_images_res => {
-        // Set product code to string
-        for(var i = 0; i < product_images_res.data.length; i++) {
-          product_images_res.data[i].product_code = product_images_res.data[i].product_code.product_code
-        }
+    //     // Push images to item
+    //     for(var k = 0; k < product_images_res.data.length; k++) {
+    //       if (res.data.product_code === product_images_res.data[k].product_code) {
+    //         res.data.images.push(product_images_res.data[k].image_url)
+    //       }          
+    //     }
         
-        // Initial images to each item
-        res.data.images = []
+    //     this.setState({
+    //       data: res.data,
+    //       selectedColors: selectedColors
+    //     });
+    //   });
+    // });
 
-        // Push images to item
-        for(var k = 0; k < product_images_res.data.length; k++) {
-          if (res.data.product_code === product_images_res.data[k].product_code) {
-            res.data.images.push(product_images_res.data[k].image_url)
-          }          
-        }
-
-        this.setState({
-          data: res.data,
-          selectedColors: selectedColors
-        });
+    const brands_url = "http://shops.witpakulii.de/backendbrands/"
+    axios.get(brands_url).then(res => {
+      this.setState({
+        brands: res.data.payload
       });
+    });
 
+    const colors_url = "http://shops.witpakulii.de/backendcolors/"
+    axios.get(colors_url).then(res => {
+      var { data } = this.state;
+      data.colors = res.data.payload
+      data.manufactured_date = new Date()
+      this.setState({
+        data: data
+      });
     });
   }
   render() {
-    var { data } = this.state;
+    var { data, brands } = this.state;
     var colors = [];
 
     for (var i=0; i<data.colors.length; i++) {
@@ -90,6 +137,13 @@ class Product extends Component {
         <MDBInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onChange={this.handleImageFileChange} />
       </div>
     )
+    var brands_comp = (
+      <div>
+        <select value={this.state.data.brand.brand_id} onChange={this.handleBrandChange} >
+          {brands.map(({ brand_id, brand_name }, index) => <option value={brand_id}>{brand_name}</option>)}
+        </select>
+      </div>
+    )
     // if (data.images.length !== 0) {
     //   images_comp = (
     //   <img class="card-img-top mb-5 mb-md-0" src={"http://shops.witpakulii.de/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
@@ -105,24 +159,34 @@ class Product extends Component {
                 {images_comp}
               </div>
               <div class="col-md-6">
-                <div class="mb-1 fw-bolder">{data.brand.brand_name}</div>
-                <h1 class="display-5 fw-bolder text-black">{data.product_name}
+                <div class="mb-1 fw-bolder">
+                  {brands_comp}
+                </div>
+                <h1 class="display-5 fw-bolder text-black">
+                  <MDBInput label="Product Name" background size="lg" value={this.state.data.product_name} onChange={this.handleProductNameChange} />
                 </h1>
-                <div class="mb-1 ">{data.manufactured_date}</div>
+                <div class="mb-1">
+                  <DatePicker selected={this.state.data.manufactured_date} onChange={this.handleManufacturedDateChange} />
+                </div>
                 <p class="lead">
-                  {data.product_description}
+                  <MDBInput type="textarea" label="Description" background value={this.state.data.product_description} onChange={this.handleProductDescriptionChange} />
                 </p>
-                <div class="d-flex  align-items-center mt-2 mb-2 fw-bolder"> <span>Colors</span>
-                  {colors}
+                <div class="row d-flex align-items-center m-2 fw-bolder">
+                  <span>Colors</span>
+                  <div class="row">
+                    {colors}
+                  </div>
                 </div>
                 <div class="fs-5 mb-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
                   
                   <h4 class="font-weight-bold blue-text">
-                    <strong>฿{data.price}</strong>
+                    <strong>
+                      <MDBInput type="number" label="Price (฿)" background size="lg" value={this.state.data.price} onChange={this.handlePriceChange} />
+                    </strong>
                   </h4>
                   <button class=" btn btn-primary btn-lg flex-shrink-0" type="button">
                     <i class="bi-cart-fill me-1"></i>
-                    Add to cart
+                    Add
                   </button>
                 </div>
               </div>
@@ -134,7 +198,7 @@ class Product extends Component {
         product_name: {this.state.data.product_name} <br />
         product_description: {this.state.data.product_description} <br />
         price: {this.state.data.price} <br />
-        manufactured_date: {this.state.data.manufactured_date} <br />
+        {/* manufactured_date: {this.state.data.manufactured_date} <br /> */}
         amount: {this.state.data.amount} <br />
         brand.brand_id: {this.state.data.brand.brand_id} <br />
         brand.brand_name: {this.state.data.brand.brand_name} <br />
