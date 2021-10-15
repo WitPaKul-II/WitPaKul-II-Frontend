@@ -12,14 +12,16 @@ class Product extends Component {
       data: { 
         "product_code": "", 
         "product_name": "", 
-        "product_classNameription": "", 
+        "product_description": "", 
         "price": "0", 
+        "_manufactured_date": new Date(), 
         "manufactured_date": "", 
         "amount": 0, 
         "brand": { "brand_id": "", "brand_name": "" }, 
         "colors": [],
         "images": [] 
       },
+      imageFileURL: null,
       imageFile: null,
       brands: [],
       selectedColors: []
@@ -29,9 +31,10 @@ class Product extends Component {
     this.handleProductNameChange = this.handleProductNameChange.bind(this)
     this.handleManufacturedDateChange = this.handleManufacturedDateChange.bind(this)
     this.handleAmountChange = this.handleAmountChange.bind(this)
-    this.handleProductclassNameriptionChange = this.handleProductclassNameriptionChange.bind(this)
+    this.handleProductDescriptionChange = this.handleProductDescriptionChange.bind(this)
     this.handlePriceChange = this.handlePriceChange.bind(this)
     this.handleImageFileChange = this.handleImageFileChange.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
   }
   handleBrandChange(event) {
     var { data } = this.state;
@@ -41,7 +44,7 @@ class Product extends Component {
   }
   handleProductCodeChange(event) {
     var { data } = this.state
-    data.product_name = event.target.value
+    data.product_code = event.target.value
     this.setState({data: data})
   }
   handleProductNameChange(event) {
@@ -51,7 +54,8 @@ class Product extends Component {
   }
   handleManufacturedDateChange(value) {
     var { data } = this.state
-    data.manufactured_date = value
+    data._manufactured_date = value
+    data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
     this.setState({data: data})
   }
   handleAmountChange(event){
@@ -59,9 +63,9 @@ class Product extends Component {
     data.amount = event.target.value
     this.setState({data: data})
   }
-  handleProductclassNameriptionChange(event) {
+  handleProductDescriptionChange(event) {
     var { data } = this.state
-    data.product_classNameription = event.target.value
+    data.product_description = event.target.value
     this.setState({data: data})
   }
   handlePriceChange(event) {
@@ -70,13 +74,65 @@ class Product extends Component {
     this.setState({data: data})
   }
   handleImageFileChange(event) {
-    this.setState({imageFile: URL.createObjectURL(event.target.files[0])})
+    this.setState({
+      imageFileURL: URL.createObjectURL(event.target.files[0]),
+      imageFile: event.target.files[0]
+    })
   }
   handleColor(color) {
     var { selectedColors } = this.state;
-    selectedColors[color.color_name] = !this.state.selectedColors[color.color_name];
+    if (selectedColors.indexOf(color.color_id) === -1) {
+      selectedColors.push(color.color_id)
+    }
+    else {
+      var index = selectedColors.indexOf(color.color_id);
+      if (index !== -1) {
+        selectedColors.splice(index, 1);
+      }
+    }
     this.setState({
       selectedColors: selectedColors
+    });
+  }
+  handleAdd(event) {
+    var { data, imageFileURL, imageFile, selectedColors } = this.state;
+    var colors = []
+    for (var i=0; i<data.colors.length; i++) {
+      if (selectedColors.indexOf(data.colors[i].color_id) !== -1) {
+        colors.push(data.colors[i])
+      }
+    }
+    data.colors = colors;
+    var formData = new FormData();
+    formData.append("image", imageFile);
+    axios.post(
+      process.env.REACT_APP_BACKEND + "addproductId", 
+      JSON.stringify(data), 
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      console.log(response);
+      axios.post(process.env.REACT_APP_BACKEND + "images", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'product_code': data.product_code,
+          'filename': data.product_code + "-" + imageFile.name
+        }
+      })
+      .then(response => {
+        console.log(response);
+        window.location.href = "/shop";
+      })
+      .catch(error => {
+        console.log(error.response.data)
+      });
+    })
+    .catch(error => {
+      console.log(error.response.data)
     });
   }
   isActive(color_name) {
@@ -84,38 +140,12 @@ class Product extends Component {
     return ((selectedColors[color_name]) ?'active':'default');
   }
   componentDidMount() {
-    // const url = 'http://shops.witpakulii.de/backendproductcode/' + this.props.match.params[0];
-    // axios.get(url).then(res => {
-    //   var selectedColors = {}
-    //   for (var i=0; i<res.data.colors.length; i++) {
-    //     selectedColors[res.data.colors[i].color_name] = false;
-    //   }
-    //   const product_images_url = 'http://shops.witpakulii.de/backendproductImages/findAll/';
-    //   axios.get(product_images_url).then(product_images_res => {
-    //     // Set product code to string
-    //     for(var i = 0; i < product_images_res.data.length; i++) {
-    //       product_images_res.data[i].product_code = product_images_res.data[i].product_code.product_code
-    //     }
-    //     // Initial images to each item
-    //     res.data.images = []
-
-    //     // Push images to item
-    //     for(var k = 0; k < product_images_res.data.length; k++) {
-    //       if (res.data.product_code === product_images_res.data[k].product_code) {
-    //         res.data.images.push(product_images_res.data[k].image_url)
-    //       }          
-    //     }
-        
-    //     this.setState({
-    //       data: res.data,
-    //       selectedColors: selectedColors
-    //     });
-    //   });
-    // });
-
     const brands_url = process.env.REACT_APP_BACKEND + "brands/findAll"
     axios.get(brands_url).then(res => {
+      var { data } = this.state;
+      data.brand = res.data[0]
       this.setState({
+        data: data,
         brands: res.data
       });
     });
@@ -124,7 +154,8 @@ class Product extends Component {
     axios.get(colors_url).then(res => {
       var { data } = this.state;
       data.colors = res.data
-      data.manufactured_date = new Date()
+      data._manufactured_date = new Date()
+      data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
       this.setState({
         data: data
       });
@@ -145,7 +176,7 @@ class Product extends Component {
     }
     var images_comp = (
       <div>
-        <img className="card-img-top mb-5 mb-md-0" src={this.state.imageFile} alt="..." />
+        <img className="card-img-top mb-5 mb-md-0" src={this.state.imageFileURL} alt="..." />
         <MDBInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onChange={this.handleImageFileChange} />
       </div>
     )
@@ -181,10 +212,10 @@ class Product extends Component {
                   <MDBInput label="Product Name" background size="lg" value={this.state.data.product_name} onChange={this.handleProductNameChange} />
                 </h1>
                 <div className="mb-1">
-                  <DatePicker selected={this.state.data.manufactured_date} onChange={this.handleManufacturedDateChange} />
+                  <DatePicker selected={this.state.data._manufactured_date} onChange={this.handleManufacturedDateChange} />
                 </div>
                 <div>
-                  <MDBInput type="textarea" label="classNameription" background value={this.state.data.product_classNameription} onChange={this.handleProductclassNameriptionChange} />
+                  <MDBInput type="textarea" label="Description" background value={this.state.data.product_description} onChange={this.handleProductDescriptionChange} />
                 </div>
                 <div className="row d-flex align-items-center m-2 fw-bolder">
                   <span>Colors</span>
@@ -205,7 +236,7 @@ class Product extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
-                  <button className=" btn btn-primary btn-lg flex-shrink-0" type="button">
+                  <button className=" btn btn-primary btn-lg flex-shrink-0" type="button" onClick={this.handleAdd}>
                     <i className="bi-cart-fill me-1"></i>
                     Add
                   </button>
@@ -217,7 +248,7 @@ class Product extends Component {
         [Debug] <br />
         product_code: {this.state.data.product_code} <br />
         product_name: {this.state.data.product_name} <br />
-        product_classNameription: {this.state.data.product_classNameription} <br />
+        product_description: {this.state.data.product_description} <br />
         price: {this.state.data.price} <br />
         {/* manufactured_date: {this.state.data.manufactured_date} <br /> */}
         amount: {this.state.data.amount} <br />
