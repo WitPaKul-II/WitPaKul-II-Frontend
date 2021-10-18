@@ -117,8 +117,7 @@ class Product extends Component {
           'Content-Type': 'application/json'
         }
       }
-    )
-    .then(response => {
+    ).then(response => {
       if (imageFile) {
         var formData = new FormData();
         formData.append("image", imageFile);
@@ -126,18 +125,16 @@ class Product extends Component {
           headers: {
             'Content-Type': 'multipart/form-data;charset=utf-8',
             'product_code': data.product_code,
-            'filename': data.product_code + "-" + (new Date).getTime()
+            'filename': data.product_code + "-" + (new Date()).getTime()
           }
-        })
-        .then(response => {
-        })
-        .catch(error => {
+        }).then(response => {
+          console.log(response)
+        }).catch(error => {
           console.log(error.response.data)
         });
       }
       window.location.href = "/shop";
-    })
-    .catch(error => {
+    }).catch(error => {
       console.log(error.response.data)
     });
   }
