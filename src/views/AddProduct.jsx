@@ -21,7 +21,7 @@ class Product extends Component {
         "colors": [],
         "images": [] 
       },
-      imageFileURL: null,
+      imageFileURL: "/assets/image/NoImage.png",
       imageFile: null,
       brands: [],
       selectedColors: []
@@ -54,23 +54,15 @@ class Product extends Component {
   }
   handleManufacturedDateChange(value) {
     var { data } = this.state
-    data._manufactured_date = value
-    data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
-    this.setState({data: data})
-  }
-  handleAmountChange(event){
-    var { data } = this.state
-    data.amount = event.target.value
-    this.setState({data: data})
+    if (value) {
+      data._manufactured_date = value
+      data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
+      this.setState({data: data})
+    }
   }
   handleProductDescriptionChange(event) {
     var { data } = this.state
     data.product_description = event.target.value
-    this.setState({data: data})
-  }
-  handlePriceChange(event) {
-    var { data } = this.state
-    data.price = event.target.value
     this.setState({data: data})
   }
   handleImageFileChange(event) {
@@ -94,8 +86,22 @@ class Product extends Component {
       selectedColors: selectedColors
     });
   }
+  handlePriceChange(event) {
+    var { data } = this.state
+    if (event.target.value !== "") {
+      data.price = event.target.value
+      this.setState({data: data})
+    }
+  }
+  handleAmountChange(event){
+    var { data } = this.state
+    if (event.target.value !== "") {
+      data.amount = event.target.value
+      this.setState({data: data})
+    }
+  }
   handleAdd(event) {
-    var { data, imageFileURL, imageFile, selectedColors } = this.state;
+    var { data, imageFile, selectedColors } = this.state;
     var colors = []
     for (var i=0; i<data.colors.length; i++) {
       if (selectedColors.indexOf(data.colors[i].color_id) !== -1) {
@@ -103,8 +109,6 @@ class Product extends Component {
       }
     }
     data.colors = colors;
-    var formData = new FormData();
-    formData.append("image", imageFile);
     axios.post(
       process.env.REACT_APP_BACKEND + "addproductId", 
       JSON.stringify(data), 
@@ -115,29 +119,31 @@ class Product extends Component {
       }
     )
     .then(response => {
-      console.log(response);
-      axios.post(process.env.REACT_APP_BACKEND + "images", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'product_code': data.product_code,
-          'filename': data.product_code + "-" + imageFile.name
-        }
-      })
-      .then(response => {
-        console.log(response);
-        window.location.href = "/shop";
-      })
-      .catch(error => {
-        console.log(error.response.data)
-      });
+      if (imageFile) {
+        var formData = new FormData();
+        formData.append("image", imageFile);
+        axios.post(process.env.REACT_APP_BACKEND + "images", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data;charset=utf-8',
+            'product_code': data.product_code,
+            'filename': data.product_code + "-" + (new Date).getTime()
+          }
+        })
+        .then(response => {
+        })
+        .catch(error => {
+          console.log(error.response.data)
+        });
+      }
+      window.location.href = "/shop";
     })
     .catch(error => {
       console.log(error.response.data)
     });
   }
-  isActive(color_name) {
+  isActive(color_id, mode) {
     var { selectedColors } = this.state;
-    return ((selectedColors[color_name]) ?'active':'default');
+    return ((selectedColors.includes(color_id)) ? 'active border border-success' : 'default');
   }
   componentDidMount() {
     const brands_url = process.env.REACT_APP_BACKEND + "brands/findAll"
@@ -169,7 +175,7 @@ class Product extends Component {
       colors.push(
         <MDBBtn 
           key={data.colors[i].color_id}
-          className={this.isActive(data.colors[i].color_name)}
+          className={this.isActive(data.colors[i].color_id, "class")}
           color={data.colors[i].color_name.toLowerCase()} onClick={this.handleColor.bind(this, data.colors[i])}
         ></MDBBtn>
       );
