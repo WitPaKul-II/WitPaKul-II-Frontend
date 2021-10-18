@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
-import { MDBBtn } from 'mdbreact';
+import { MDBBtn, MDBIcon } from "mdbreact";
 
 class Product extends Component {
   constructor(props) {
@@ -62,6 +62,24 @@ class Product extends Component {
       selectedColors: selectedColors
     });
   }
+  handleDelete(event){
+    var { data } = this.state;
+    if (window.confirm('Are you sure you wish to delete this item?')) {
+      axios.delete(
+        process.env.REACT_APP_BACKEND + "delete/" + data.product_code,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(response => {
+        console.log(response)
+        window.location.href = "/shop";
+      }).catch(error => {
+        console.log(error.response.data)
+      });
+    }
+  }
   isActive(color_name) {
     var { selectedColors } = this.state;
     return ((selectedColors[color_name]) ? 'active' : 'default');
@@ -79,7 +97,7 @@ class Product extends Component {
         ></MDBBtn>
       );
     }
-  
+
     var images_comp = (
       <img class="card-img-top mb-5 mb-md-0" src="/assets/image/NoImage.png" alt="..." />
     )
@@ -88,6 +106,7 @@ class Product extends Component {
         <img class="card-img-top mb-5 mb-md-0" src={process.env.REACT_APP_BACKEND + "images/" + data.images[0].substring(data.images[0].lastIndexOf('/') + 1, data.images[0].length)} alt="..." />
       )
     }
+
     return (
       <div>
         <Navbar />
@@ -104,24 +123,29 @@ class Product extends Component {
                 <p class="lead">
                   {data.product_description}
                 </p>
-                <div class="d-flex  align-items-center mt-2 mb-2 fw-bolder"> <span>Colors</span>
+                <div class="d-flex align-items-center mt-2 mb-2 fw-bolder"> <span>Colors</span>
                   {colors}
                 </div>
-                <div class="fs-5 mb-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
-
-                  <h4 class="font-weight-bold blue-text">
-                    <strong>฿{data.price}</strong>
-                  </h4>
-                  <button class=" btn btn-primary btn-lg flex-shrink-0" type="button">
-                    <i class="bi-cart-fill me-1"></i>
-                    Add to cart
-                  </button>
+                <div class="fs-5 mb-5 fw-bolder text-warning">
+                  <div className="float-left">
+                    <h4 class="font-weight-bold blue-text">
+                      <strong>฿{data.price}</strong>
+                    </h4>
+                  </div>
+                  <div className="float-right">
+                    <MDBBtn color="danger" onClick={ this.handleDelete.bind(this) } >
+                      <MDBIcon icon="trash" />
+                    </MDBBtn>
+                    <MDBBtn color="primary">
+                      Add to cart
+                    </MDBBtn>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-      <Footerbar />
+        <Footerbar />
       </div>
     );
   }
