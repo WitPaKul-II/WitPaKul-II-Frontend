@@ -5,7 +5,7 @@ import Footerbar from '../components/Footerbar';
 import { MDBBtn, MDBInput } from 'mdbreact';
 import DatePicker from 'react-datepicker';
 
-class AddProduct extends Component {
+class EditProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class AddProduct extends Component {
     this.handleProductDescriptionChange = this.handleProductDescriptionChange.bind(this)
     this.handlePriceChange = this.handlePriceChange.bind(this)
     this.handleImageFileChange = this.handleImageFileChange.bind(this)
-    this.handleAdd = this.handleAdd.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
   handleBrandChange(event) {
     var { data } = this.state;
@@ -100,7 +100,7 @@ class AddProduct extends Component {
       this.setState({data: data})
     }
   }
-  handleAdd(event) {
+  handleSave(event) {
     var { data, imageFile, selectedColors } = this.state;
     var colors = []
     for (var i=0; i<data.colors.length; i++) {
@@ -109,8 +109,9 @@ class AddProduct extends Component {
       }
     }
     data.colors = colors;
-    axios.post(
-      process.env.REACT_APP_BACKEND + "addproductId", 
+
+    axios.put(
+      process.env.REACT_APP_BACKEND + "edit", 
       JSON.stringify(data), 
       {
         headers: {
@@ -133,7 +134,7 @@ class AddProduct extends Component {
           console.log(error.response.data)
         });
       }
-      window.location.href = "/shop";
+      // window.location.href = "/shop";
     }).catch(error => {
       console.log(error.response.data)
     });
@@ -143,6 +144,46 @@ class AddProduct extends Component {
     return ((selectedColors.includes(color_id)) ? 'active border border-success' : 'default');
   }
   componentDidMount() {
+    const url = process.env.REACT_APP_BACKEND + 'productcode/' + this.props.match.params[0];
+    axios.get(url).then(product_res => {
+      var selectedColors = []
+      for (var i = 0; i < product_res.data.colors.length; i++) {
+        selectedColors.push(product_res.data.colors[i].color_id);
+      }
+
+      const product_images_url = process.env.REACT_APP_BACKEND + 'productImages/findAll/';
+      axios.get(product_images_url).then(product_images_res => {
+        // Set product code to string
+        for (var i = 0; i < product_images_res.data.length; i++) {
+          product_images_res.data[i].product_code = product_images_res.data[i].product_code.product_code
+        }
+
+        // Initial images to each item
+        product_res.data.images = []
+
+        // Push images to item
+        for (var k = 0; k < product_images_res.data.length; k++) {
+          if (product_res.data.product_code === product_images_res.data[k].product_code) {
+            product_res.data.images.push(product_images_res.data[k].image_url)
+          }
+        }
+
+        const colors_url = process.env.REACT_APP_BACKEND + "colors/findAll"
+        axios.get(colors_url).then(colors_res => {
+          var data = product_res.data;
+          data.colors = colors_res.data
+          data._manufactured_date = new Date()
+          data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
+
+          this.setState({
+            data: data,
+            imageFileURL: process.env.REACT_APP_BACKEND + 'images/' + data.images[data.images.length-1],
+            selectedColors: selectedColors
+          });
+        });
+      });
+    });
+
     const brands_url = process.env.REACT_APP_BACKEND + "brands/findAll"
     axios.get(brands_url).then(res => {
       var { data } = this.state;
@@ -150,17 +191,6 @@ class AddProduct extends Component {
       this.setState({
         data: data,
         brands: res.data
-      });
-    });
-
-    const colors_url = process.env.REACT_APP_BACKEND + "colors/findAll"
-    axios.get(colors_url).then(res => {
-      var { data } = this.state;
-      data.colors = res.data
-      data._manufactured_date = new Date()
-      data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
-      this.setState({
-        data: data
       });
     });
   }
@@ -190,11 +220,6 @@ class AddProduct extends Component {
         </select>
       </div>
     )
-    // if (data.images.length !== 0) {
-    //   images_comp = (
-    //   <img className="card-img-top mb-5 mb-md-0" src={"http://shops.witpakulii.de/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
-    //   )
-    // }
     return (
       <div>
         <Navbar />
@@ -239,9 +264,9 @@ class AddProduct extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
-                  <button className=" btn btn-primary btn-lg flex-shrink-0" type="button" onClick={this.handleAdd}>
+                  <button className=" btn btn-primary btn-lg flex-shrink-0" type="button" onClick={this.handleSave}>
                     <i className="bi-cart-fill me-1"></i>
-                    Add
+                    Save
                   </button>
                 </div>
               </div>
@@ -265,4 +290,4 @@ class AddProduct extends Component {
   }
 }
 
-export default AddProduct;
+export default EditProduct;

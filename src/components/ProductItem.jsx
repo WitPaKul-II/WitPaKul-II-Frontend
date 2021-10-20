@@ -7,7 +7,7 @@ class ProductItem extends Component {
     var image = (<img src="/assets/image/NoImage.png" class="card-img-top" alt="" />)
     if (this.props.data.images.length > 0) {
       image = (
-        <img src={process.env.REACT_APP_BACKEND + "images/" + this.props.data.images[0]} class="card-img-top" alt="" />
+        <img src={process.env.REACT_APP_BACKEND + "images/" + this.props.data.images[this.props.data.images.length-1]} class="card-img-top" alt="" />
       )
     }
     return (
