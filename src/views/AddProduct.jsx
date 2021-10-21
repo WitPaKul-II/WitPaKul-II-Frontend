@@ -135,7 +135,7 @@ class AddProduct extends Component {
       }
       window.location.href = "/shop";
     }).catch(error => {
-      console.log(error.response.data)
+      console.log(error)
     });
   }
   isActive(color_id, mode) {
