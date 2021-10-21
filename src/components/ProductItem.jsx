@@ -4,13 +4,19 @@ import { MDBNavLink } from 'mdbreact';
 class ProductItem extends Component {
 
   render() {
+    var image = (<img src="/assets/image/NoImage.png" class="card-img-top" alt="" />)
+    if (this.props.data.images.length > 0) {
+      image = (
+        <img src={process.env.REACT_APP_BACKEND + "images/" + this.props.data.images[0]} class="card-img-top" alt="" />
+      )
+    }
     return (
       <div class="col-lg-4 col-md-6 mb-4">
         {this.props.images}
         <div class="card">
           <MDBNavLink to={"/product/" + this.props.data.product_code}>
             <div class="view overlay">
-              <img src={"http://shops.witpakulii.de/backendimages/" + this.props.data.images[0].substring(this.props.data.images[0].lastIndexOf('/')+1, this.props.data.images[0].length)} class="card-img-top" alt="" />
+              {image}
               <div class="mask rgba-white-slight"></div>
             </div>
             <div class="card-body text-center">
