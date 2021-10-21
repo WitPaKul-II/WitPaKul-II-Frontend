@@ -35,6 +35,7 @@ class EditProduct extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this)
     this.handleImageFileChange = this.handleImageFileChange.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
   }
   handleBrandChange(event) {
     var { data } = this.state;
@@ -134,10 +135,14 @@ class EditProduct extends Component {
           console.log(error.response.data)
         });
       }
-      // window.location.href = "/shop";
+      window.location.href = "/product/" + data.product_code;
     }).catch(error => {
       console.log(error.response.data)
     });
+  }
+  handleCancel(event) {
+    var { data } = this.state;
+    window.location.href = "/product/" + data.product_code;
   }
   isActive(color_id, mode) {
     var { selectedColors } = this.state;
@@ -246,7 +251,7 @@ class EditProduct extends Component {
                   <MDBInput type="textarea" label="Description" background value={this.state.data.product_description} onChange={this.handleProductDescriptionChange} />
                 </div>
                 <div className="row d-flex align-items-center m-2 fw-bolder">
-                  <span>Colors</span>
+                  <div className="mr-4">Colors</div>
                   <div className="row">
                     {colors}
                   </div>
@@ -264,10 +269,12 @@ class EditProduct extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
-                  <button className=" btn btn-primary btn-lg flex-shrink-0" type="button" onClick={this.handleSave}>
-                    <i className="bi-cart-fill me-1"></i>
+                  <MDBBtn color="default" onClick={this.handleSave} >
                     Save
-                  </button>
+                  </MDBBtn>
+                  <MDBBtn color="danger" onClick={this.handleCancel} >
+                    Cancel
+                  </MDBBtn>
                 </div>
               </div>
             </div>

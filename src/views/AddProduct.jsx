@@ -221,7 +221,7 @@ class AddProduct extends Component {
                   <MDBInput type="textarea" label="Description" background value={this.state.data.product_description} onChange={this.handleProductDescriptionChange} />
                 </div>
                 <div className="row d-flex align-items-center m-2 fw-bolder">
-                  <span>Colors</span>
+                  <div className="mr-4">Colors</div>
                   <div className="row">
                     {colors}
                   </div>
