@@ -21,6 +21,8 @@ class Product extends Component {
       },
       selectedColors: []
     };
+    this.handleEdit = this.handleEdit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     const url = process.env.REACT_APP_BACKEND + 'productcode/' + this.props.match.params[0];
@@ -62,6 +64,11 @@ class Product extends Component {
       selectedColors: selectedColors
     });
   }
+  handleEdit(event){
+    var { data } = this.state;
+    
+    window.location.href = "/editproduct/" + data.product_code;
+  }
   handleDelete(event){
     var { data } = this.state;
     if (window.confirm('Are you sure you wish to delete this item?')) {
@@ -76,7 +83,7 @@ class Product extends Component {
         console.log(response)
         window.location.href = "/shop";
       }).catch(error => {
-        console.log(error.response.data)
+        console.log(error)
       });
     }
   }
@@ -103,40 +110,49 @@ class Product extends Component {
     )
     if (data.images.length > 0) {
       images_comp = (
-        <img class="card-img-top mb-5 mb-md-0" src={process.env.REACT_APP_BACKEND + "images/" + data.images[0].substring(data.images[0].lastIndexOf('/') + 1, data.images[0].length)} alt="..." />
+        <img class="card-img-top mb-5 mb-md-0" src={process.env.REACT_APP_BACKEND + "images/" + data.images[data.images.length-1]} alt="..." />
       )
     }
 
     return (
       <div>
         <Navbar />
-        <section class="py-5">
-          <div class="container px-4 px-lg-5 my-5 ">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-              <div class="col-md-6">
+        <section className="py-5">
+          <div className="container px-4 px-lg-5 my-5 ">
+            <div className="row gx-4 gx-lg-5 align-items-center">
+              <div className="col-md-6">
                 {images_comp}
               </div>
-              <div class="col-md-6">
-                <div class="mb-1 fw-bolder">{data.brand.brand_name}</div>
-                <h1 class="display-5 fw-bolder text-black">{data.product_name}</h1>
-                <div class="mb-1 ">{data.manufactured_date}</div>
-                <p class="lead">
+              <div className="col-md-6">
+                <div className="mb-1 fw-bolder">{data.brand.brand_name}</div>
+                <h1 className="display-5 fw-bolder text-black">{data.product_name}</h1>
+                <div className="float-right">
+                  <MDBBtn color="danger" onClick={this.handleDelete} >
+                    <MDBIcon icon="trash" />
+                  </MDBBtn>
+                </div>
+                <div className="mb-1">{data.manufactured_date}</div>
+                <div className="mb-1 text-weight-lighter"><small>{data.amount} left in stock</small></div>
+                <p className="lead">
                   {data.product_description}
                 </p>
-                <div class="d-flex align-items-center mt-2 mb-2 fw-bolder"> <span>Colors</span>
-                  {colors}
+                <div className="row d-flex align-items-center m-2 fw-bolder">
+                  <div className="mr-4">Colors</div>
+                  <div className="row">
+                    {colors}
+                  </div>
                 </div>
-                <div class="fs-5 mb-5 fw-bolder text-warning">
+                <div className="fs-5 mb-5 fw-bolder text-warning">
                   <div className="float-left">
-                    <h4 class="font-weight-bold blue-text">
+                    <h4 className="font-weight-bold blue-text">
                       <strong>฿{data.price}</strong>
                     </h4>
                   </div>
                   <div className="float-right">
-                    <MDBBtn color="danger" onClick={ this.handleDelete.bind(this) } >
-                      <MDBIcon icon="trash" />
+                    <MDBBtn color="light" onClick={this.handleEdit} >
+                      <MDBIcon icon="marker" />
                     </MDBBtn>
-                    <MDBBtn color="primary">
+                    <MDBBtn color="default">
                       Add to cart
                     </MDBBtn>
                   </div>
