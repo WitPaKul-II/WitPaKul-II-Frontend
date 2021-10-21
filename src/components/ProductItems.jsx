@@ -38,15 +38,23 @@ class ProductItems extends Component {
     });
   }
   render() {
-    var { items } = this.state;    
+    var { items } = this.state;
+    const _items = items.filter(
+      item => 
+        item.product_name.toLowerCase().includes(this.props.searchText.toLowerCase()) || 
+        item.brand.brand_name.toLowerCase().includes(this.props.searchText.toLowerCase())
+    );
     return (
       <MDBContainer breakpoint="md" >
+        <div class="pt-5 px-5">
+          Search result(s) of "{this.props.searchText}"
+        </div>
         <div class="p-5">
           <section class="text-center mb-4">
             <div class="row wow fadeIn">
               {
-                Object.keys(items).map(key => (
-                  <ProductItem data={items[key]} />
+                Object.keys(_items).map(key => (
+                  <ProductItem data={_items[key]} />
                 ))
               }
             </div>

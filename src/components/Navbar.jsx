@@ -6,20 +6,40 @@ import {
 
 class Navbar extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    searchText: ''
   };
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  handleSearchChange = (event) =>  {
+    this.setState({ searchText: event.target.value });
+    if (this.props.onChange) {
+      this.props.onChange(event);
+    }
+  }
+
   render() {
+    var search = <div/>
+    if (this.props.search) {
+      search = (
+        <MDBNavItem >
+          <MDBFormInline waves>
+            <div className="md-form my-0">
+              <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value={this.state.searchText} onChange={this.handleSearchChange} />
+            </div>
+          </MDBFormInline>
+        </MDBNavItem>
+      );
+    }
     return (
       <div>
         <MDBNavbar color="default-color" dark expand="md">
           <MDBNavbarBrand>
             <MDBNavLink to="/">
-              <img src="assets/image/Among2.png" style={{ height: "35px" }} alt="" loading="lazy" />
+              <img src="/assets/image/Among2.png" style={{ height: "35px" }} alt="" loading="lazy" />
             </MDBNavLink>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -33,23 +53,17 @@ class Navbar extends Component {
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
+              {search}
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" />
                   </MDBDropdownToggle>
-                  <MDBDropdownMenu className="dropdown-default">
+                  <MDBDropdownMenu right className="dropdown-default">
                     <MDBNavLink to="signin"><MDBDropdownItem>Login</MDBDropdownItem></MDBNavLink>
                     <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
-              </MDBNavItem>
-              <MDBNavItem>
-                <MDBFormInline waves>
-                  <div className="md-form my-0">
-                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                  </div>
-                </MDBFormInline>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>
