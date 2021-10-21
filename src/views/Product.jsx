@@ -83,7 +83,7 @@ class Product extends Component {
         console.log(response)
         window.location.href = "/shop";
       }).catch(error => {
-        console.log(error.response.data)
+        console.log(error)
       });
     }
   }

@@ -130,7 +130,7 @@ class AddProduct extends Component {
         }).then(response => {
           console.log(response)
         }).catch(error => {
-          console.log(error.response.data)
+          console.log(error)
         });
       }
       window.location.href = "/shop";
