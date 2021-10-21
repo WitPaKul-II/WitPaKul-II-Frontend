@@ -27,7 +27,6 @@ class EditProduct extends Component {
       selectedColors: []
     };
     this.handleBrandChange = this.handleBrandChange.bind(this)
-    this.handleProductCodeChange = this.handleProductCodeChange.bind(this)
     this.handleProductNameChange = this.handleProductNameChange.bind(this)
     this.handleManufacturedDateChange = this.handleManufacturedDateChange.bind(this)
     this.handleAmountChange = this.handleAmountChange.bind(this)
@@ -41,11 +40,6 @@ class EditProduct extends Component {
     var { data } = this.state;
     data.brand.brand_id = event.target.value
     data.brand.brand_name = event.target[event.target.selectedIndex].text
-    this.setState({data: data})
-  }
-  handleProductCodeChange(event) {
-    var { data } = this.state
-    data.product_code = event.target.value
     this.setState({data: data})
   }
   handleProductNameChange(event) {
@@ -132,12 +126,12 @@ class EditProduct extends Component {
         }).then(response => {
           console.log(response)
         }).catch(error => {
-          console.log(error.response.data)
+          console.log(error)
         });
       }
       window.location.href = "/product/" + data.product_code;
     }).catch(error => {
-      console.log(error.response.data)
+      console.log(error)
     });
   }
   handleCancel(event) {
@@ -238,9 +232,9 @@ class EditProduct extends Component {
                 <div className="mb-1 fw-bolder">
                   {brands_comp}
                 </div>
-                <h3 className="display-5 fw-bolder text-black w-50">
-                  <MDBInput label="Product Code" background value={this.state.data.product_code} onChange={this.handleProductCodeChange} />
-                </h3>
+                <h6 className="display-5 fw-bolder text-black w-50">
+                  Product Code {this.state.data.product_code}
+                </h6>
                 <h1 className="display-5 fw-bolder text-black">
                   <MDBInput label="Product Name" background size="lg" value={this.state.data.product_name} onChange={this.handleProductNameChange} />
                 </h1>
