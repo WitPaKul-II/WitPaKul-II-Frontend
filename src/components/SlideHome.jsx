@@ -4,7 +4,7 @@ import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer }
 class SlideHome extends Component {
   render() {
     return (
-      <MDBContainer>
+      <MDBContainer fluid className="px-0">
         <MDBCarousel
           activeItem={1}
           length={3}
