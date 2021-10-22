@@ -3,7 +3,7 @@ services:
   frontend:
     container_name: WitPaKul_FrontEnd
     build: .
-    image: registry.gitlab.com/witpakul/witpakul-ii-frontend:cicd
+    image: registry.gitlab.com/witpakul/witpakul-ii-frontend:develop
 
 networks:
    default:
