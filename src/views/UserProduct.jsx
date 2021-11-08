@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
-import { MDBBtn, MDBIcon } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 
-class Product extends Component {
+class UserProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,14 +71,12 @@ class Product extends Component {
   }
   handleDelete(event){
     var { data } = this.state;
-    var token = localStorage.getItem("token");
     if (window.confirm('Are you sure you wish to delete this item?')) {
       axios.delete(
         process.env.REACT_APP_BACKEND + "delete/" + data.product_code,
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
           }
         }
       ).then(response => {
@@ -128,11 +126,11 @@ class Product extends Component {
               <div className="col-md-6">
                 <div className="mb-1 fw-bolder">{data.brand.brand_name}</div>
                 <h1 className="display-5 fw-bolder text-black">{data.product_name}</h1>
-                <div className="float-right">
+                {/* <div className="float-right">
                   <MDBBtn color="danger" onClick={this.handleDelete} >
                     <MDBIcon icon="trash" />
                   </MDBBtn>
-                </div>
+                </div> */}
                 <div className="mb-1">{data.manufactured_date}</div>
                 <div className="mb-1 text-weight-lighter"><small>{data.amount} left in stock</small></div>
                 <p className="lead">
@@ -151,9 +149,9 @@ class Product extends Component {
                     </h4>
                   </div>
                   <div className="float-right">
-                    <MDBBtn color="light" onClick={this.handleEdit} >
+                    {/* <MDBBtn color="light" onClick={this.handleEdit} >
                       <MDBIcon icon="marker" />
-                    </MDBBtn>
+                    </MDBBtn> */}
                     <MDBBtn color="default">
                       Add to cart
                     </MDBBtn>
@@ -169,4 +167,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default UserProduct;
