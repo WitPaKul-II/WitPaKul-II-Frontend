@@ -5,10 +5,14 @@ import {
 } from "mdbreact";
 
 class Navbar extends Component {
-  state = {
-    isOpen: false,
-    searchText: ''
-  };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+      searchText: ''
+    };
+  }
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -61,7 +65,7 @@ class Navbar extends Component {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu right className="dropdown-default">
                     <MDBNavLink to="signin"><MDBDropdownItem>Login</MDBDropdownItem></MDBNavLink>
-                    <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
+                    <MDBDropdownItem href="/profile">Settings</MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavItem>

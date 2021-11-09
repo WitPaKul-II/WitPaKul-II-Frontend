@@ -5,6 +5,7 @@ import AddProduct from './views/AddProduct';
 import EditProduct from './views/EditProduct';
 import Home from './views/Home';
 import Team from './views/Team';
+import Profile from './views/Profile';
 import Shop from './views/Shop';
 import Product from './views/Product';
 import SignIn from './components/SignIn'
@@ -18,6 +19,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/team' component={Team} />
+            <Route path='/profile' component={Profile} />
             <Route path='/shop' component={Shop} />
             <Route path='/product/*' component={Product} />
             <Route path='/signin' component={SignIn} />

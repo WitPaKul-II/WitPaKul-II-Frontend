@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class TeamMember extends Component {
   render() {
     return (
-      <dev>
+      <div>
         <section class="fdb-block team-2">
           <img src="/assets/image/team/Team1.png" class="d-block w-100" alt="..." />
           <div class="container">
@@ -42,7 +42,7 @@ class TeamMember extends Component {
             </div>
           </div>
         </section>
-      </dev>
+      </div>
     );
   }
 }
