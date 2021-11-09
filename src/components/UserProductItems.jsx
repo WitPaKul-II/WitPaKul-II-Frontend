@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { MDBContainer } from 'mdbreact';
 import UserProductItem from '../components/UserProductItem';
-// import ProductItemAdd from '../components/ProductItemAdd';
 
 class UserProductItems extends Component {
     constructor(props) {

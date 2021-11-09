@@ -4,13 +4,13 @@ const API_URL = "http://localhost:4000/";
 
 const register = (username, email, password, firstname, lastname, type_id) => {
   console.log(type_id)
-  return axios.post(API_URL + "register", {   
+  return axios.post(API_URL + "register", {
     username: username,
     firstname: firstname,
     lastname: lastname,
     email: email,
     password: password,
-    user_type: {type_id: type_id}
+    user_type: { type_id: type_id }
   });
 };
 
@@ -30,7 +30,8 @@ const login = (username, password) => {
         localStorage.setItem("token", response_token.data.access_token);
         localStorage.setItem("user", JSON.stringify(response_user.data));
       })
-    }}
+    }
+  }
   );
 };
 
