@@ -4,31 +4,31 @@ import { MDBNavLink } from 'mdbreact';
 class ProductItem extends Component {
 
   render() {
-    var image = (<img src="/assets/image/NoImage.png" class="card-img-top" alt="" />)
+    var image = (<img src="/assets/image/NoImage.png" className="card-img-top" alt="" />)
     if (this.props.data.images.length > 0) {
       image = (
-        <img src={process.env.REACT_APP_BACKEND + "images/" + this.props.data.images[this.props.data.images.length-1]} class="card-img-top" alt="" />
+        <img src={process.env.REACT_APP_BACKEND + "images/" + this.props.data.images[this.props.data.images.length-1]} className="card-img-top" alt="" />
       )
     }
     return (
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div className="col-lg-4 col-md-6 mb-4">
         {this.props.images}
-        <div class="card">
+        <div className="card">
           <MDBNavLink to={"/product/" + this.props.data.product_code}>
-            <div class="view overlay">
+            <div className="view overlay">
               {image}
-              <div class="mask rgba-white-slight"></div>
+              <div className="mask rgba-white-slight"></div>
             </div>
-            <div class="card-body text-center">
+            <div className="card-body text-center">
               <h5>
-                <div class="grey-text">{this.props.data.brand.brand_name}</div>
+                <div className="grey-text">{this.props.data.brand.brand_name}</div>
               </h5>
               <h5>
                 <strong>
-                  <div class="dark-grey-text">{this.props.data.product_name}</div>
+                  <div className="dark-grey-text">{this.props.data.product_name}</div>
                 </strong>
               </h5>
-              <h4 class="font-weight-bold blue-text">
+              <h4 className="font-weight-bold blue-text">
                 <strong>฿{this.props.data.price}</strong>
               </h4>
             </div>

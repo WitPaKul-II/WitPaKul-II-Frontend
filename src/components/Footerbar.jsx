@@ -8,7 +8,7 @@ class Footerbar extends Component {
         <div className="footer-copyright text-center py-3">
           <MDBContainer fluid>
             &copy; {new Date().getFullYear()} Copyright: 
-            <a class="text-white font-weight-light" href="https://www.youtube.com/watch?v=QhBnZ6NPOY0"> WitPaKul Shop II</a>
+            <a className="text-white font-weight-light" href="https://www.youtube.com/watch?v=QhBnZ6NPOY0"> WitPaKul Shop II</a>
           </MDBContainer>
         </div>
       </MDBFooter>
