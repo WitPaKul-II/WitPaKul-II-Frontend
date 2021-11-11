@@ -102,6 +102,7 @@ class AddProduct extends Component {
   }
   handleAdd(event) {
     var { data, imageFile, selectedColors } = this.state;
+    var token = localStorage.getItem("token");
     var colors = []
     for (var i=0; i<data.colors.length; i++) {
       if (selectedColors.indexOf(data.colors[i].color_id) !== -1) {
@@ -114,7 +115,8 @@ class AddProduct extends Component {
       JSON.stringify(data), 
       {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         }
       }
     ).then(response => {
@@ -124,6 +126,7 @@ class AddProduct extends Component {
         axios.post(process.env.REACT_APP_BACKEND + "images", formData, {
           headers: {
             'Content-Type': 'multipart/form-data;charset=utf-8',
+            'Authorization': `Bearer ${token}`,
             'product_code': data.product_code,
             'filename': data.product_code + "-" + (new Date()).getTime()
           }
