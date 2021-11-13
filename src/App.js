@@ -11,6 +11,7 @@ import Shop from './views/Shop';
 import UserShop from './views/UserShop';
 import UserProduct from './views/UserProduct';
 import Product from './views/Product';
+import Users from './views/Users';
 import Login from './components/Login';
 import Register from './components/Register'
 
@@ -44,6 +45,9 @@ const App = () => {
           )}
           {showAdminBoard && (
             <Route path='/editproduct/*' component={EditProduct} />
+          )}
+          {showAdminBoard && (
+            <Route path='/users' component={Users} />
           )}
           {ShowUsersBoard && (
             <Route path='/usershop' component={UserShop} />

@@ -88,9 +88,9 @@ const Navbar = (props) => {
             </MDBNavItem>
             {showAdminBoard && (
               <div>
-                <MDBNavItem>
-                  <MDBNavLink to="/shop">Admin SHOP</MDBNavLink>
-                </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/shop">Admin SHOP</MDBNavLink>
+              </MDBNavItem>
               </div>
             )}
             {ShowUsersBoard && (
@@ -98,6 +98,13 @@ const Navbar = (props) => {
                 <MDBNavItem>
                   <MDBNavLink to="/usershop">SHOP</MDBNavLink>
                 </MDBNavItem>
+              </div>
+            )}
+            {showAdminBoard && (
+              <div>
+              <MDBNavItem>
+                <MDBNavLink to="/users">USERS</MDBNavLink>
+              </MDBNavItem>
               </div>
             )}
           </MDBNavbarNav>

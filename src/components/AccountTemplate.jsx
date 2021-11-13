@@ -120,14 +120,34 @@ class AccountTemplate extends Component {
     this.setState({ editFlag: false })
   }
   componentWillMount() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    user._birth_date = new Date(user.birth_date)
-    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-    user.birth_date = (new Date(user._birth_date - tzoffset)).toISOString().slice(0, -1);
-    this.setState({
-      user: user,
-      imageFileURL: process.env.REACT_APP_BACKEND + 'users/images/' + user.user_image_url
-    });
+    var token = localStorage.getItem("token");  
+    var user = JSON.parse(localStorage.getItem("user"));   
+    if (user.user_type.type_name === "Admin1" && this.props.id) {
+      axios.get(process.env.REACT_APP_BACKEND + "users/userid/" + this.props.id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }).then((response_user) => {
+        var user = response_user.data
+        user._birth_date = new Date(user.birth_date)
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+        user.birth_date = (new Date(user._birth_date - tzoffset)).toISOString().slice(0, -1);
+        this.setState({
+          user: user,
+          imageFileURL: process.env.REACT_APP_BACKEND + 'users/images/' + user.user_image_url
+        });
+      })
+    }
+    else {
+      var user = JSON.parse(localStorage.getItem("user"));
+      user._birth_date = new Date(user.birth_date)
+      var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+      user.birth_date = (new Date(user._birth_date - tzoffset)).toISOString().slice(0, -1);
+      this.setState({
+        user: user,
+        imageFileURL: process.env.REACT_APP_BACKEND + 'users/images/' + user.user_image_url
+      });
+    }
   }
   render() {
     var { user, editFlag, editUser } = this.state;
