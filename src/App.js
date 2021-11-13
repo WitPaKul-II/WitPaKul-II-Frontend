@@ -51,9 +51,7 @@ const App = () => {
           {ShowUsersBoard && (
             <Route path='/userproduct/*' component={UserProduct} />
           )}
-          {ShowUsersBoard && (
-            <Route path='/profile' component={Profile} />
-          )}
+          <Route path='/profile' component={Profile} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
         </Switch>
