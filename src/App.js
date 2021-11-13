@@ -8,7 +8,6 @@ import Home from './views/Home';
 import Team from './views/Team';
 import Profile from './views/Profile';
 import Shop from './views/Shop';
-import UserShop from './views/UserShop';
 import UserProduct from './views/UserProduct';
 import Product from './views/Product';
 import Users from './views/Users';
@@ -34,9 +33,7 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/team' component={Team} />
-          {showAdminBoard && (
-            <Route path='/shop' component={Shop} />
-          )}
+          <Route path='/shop' component={Shop} />
           {showAdminBoard && (
             <Route path='/product/*' component={Product} />
           )}
@@ -49,12 +46,7 @@ const App = () => {
           {showAdminBoard && (
             <Route path='/users' component={Users} />
           )}
-          {ShowUsersBoard && (
-            <Route path='/usershop' component={UserShop} />
-          )}
-          {ShowUsersBoard && (
-            <Route path='/userproduct/*' component={UserProduct} />
-          )}
+          <Route path='/userproduct/*' component={UserProduct} />
           <Route path='/profile' component={Profile} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
