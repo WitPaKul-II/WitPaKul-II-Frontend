@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://shops.witpakulii.de/backend";
+const API_URL = "http://localhost:4000/";
 
 const register = (username, email, password, firstname, lastname, type_id) => {
   console.log(type_id)

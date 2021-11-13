@@ -12,6 +12,9 @@ import UserProduct from './views/UserProduct';
 import Product from './views/Product';
 import Login from './components/Login';
 import Register from './components/Register'
+import Brand from './views/Brand';
+import AddBrand from './views/AddBrand';
+import EditBrand from './views/EditBrand';
 
 const App = () => {
   const [ShowUsersBoard, setShowUsersBoard] = useState(false);
@@ -34,6 +37,15 @@ const App = () => {
             <Route path='/team' component={Team} />
             {showAdminBoard && (
             <Route path='/shop' component={Shop} />
+            )}
+             {showAdminBoard && (
+            <Route path='/brand' component={Brand} />
+            )}
+             {showAdminBoard && (
+            <Route path='/addbrand' component={AddBrand} />
+            )}
+             {showAdminBoard && (
+            <Route path='/editbrand' component={EditBrand} />
             )}
              {showAdminBoard && (
             <Route path='/product/*' component={Product} />

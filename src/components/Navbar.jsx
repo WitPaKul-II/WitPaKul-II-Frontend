@@ -30,7 +30,7 @@ const Navbar = (props) => {
   const [ShowUsersBoard, setShowUsersBoard] = useState(false);
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     history.listen((location) => {
       // clear message when changing location
@@ -59,7 +59,7 @@ const Navbar = (props) => {
       EventBus.remove("logout");
     };
   }, [currentUser, logOut]);
- 
+
   var search = <div />
   if (props.search) {
     search = (
@@ -90,6 +90,13 @@ const Navbar = (props) => {
               <div>
                 <MDBNavItem>
                   <MDBNavLink to="/shop">Admin SHOP</MDBNavLink>
+                </MDBNavItem>
+              </div>
+            )}
+            {showAdminBoard && (
+              <div>
+                <MDBNavItem>
+                  <MDBNavLink to="/brand">BRAND</MDBNavLink>
                 </MDBNavItem>
               </div>
             )}
