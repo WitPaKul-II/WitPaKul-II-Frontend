@@ -1,11 +1,12 @@
 import './App.css';
-import React, {useState,useEffect, } from 'react';
-import {  useSelector } from "react-redux";
+import React, { useState, useEffect, } from 'react';
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AddProduct from './views/AddProduct';
 import EditProduct from './views/EditProduct';
 import Home from './views/Home';
 import Team from './views/Team';
+import Profile from './views/Profile';
 import Shop from './views/Shop';
 import UserShop from './views/UserShop';
 import UserProduct from './views/UserProduct';
@@ -26,38 +27,39 @@ const App = () => {
       setShowUsersBoard(false);
     }
   }, [currentUser]);
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/team' component={Team} />
-            {showAdminBoard && (
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/team' component={Team} />
+          {showAdminBoard && (
             <Route path='/shop' component={Shop} />
-            )}
-             {showAdminBoard && (
+          )}
+          {showAdminBoard && (
             <Route path='/product/*' component={Product} />
-             )}
-            {showAdminBoard && (
+          )}
+          {showAdminBoard && (
             <Route path='/addproduct' component={AddProduct} />
-            )}
-             {showAdminBoard && (
+          )}
+          {showAdminBoard && (
             <Route path='/editproduct/*' component={EditProduct} />
-             )}
-            {ShowUsersBoard && (
+          )}
+          {ShowUsersBoard && (
             <Route path='/usershop' component={UserShop} />
-            )}
-             {ShowUsersBoard && (
+          )}
+          {ShowUsersBoard && (
             <Route path='/userproduct/*' component={UserProduct} />
-            )}
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />      
-          </Switch>
-        </div>
-      </Router>
+          )}
+          <Route path='/profile' component={Profile} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+        </Switch>
+      </div>
+    </Router>
 
-    );
-  
+  );
+
 }
 
 export default App;

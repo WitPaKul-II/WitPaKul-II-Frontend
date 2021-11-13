@@ -27,10 +27,10 @@ class ProductItems extends Component {
         }
 
         // Push images to item
-        for(var k = 0; k < product_images_res.data.length; k++) {
-          var item = items_res.data.filter(obj => obj.product_code === product_images_res.data[k].product_code)[0]
-          item.images.push(product_images_res.data[k].image_url)
-        }
+        product_images_res.data.forEach(product_image => {
+          var item = items_res.data.filter(obj => obj.product_code === product_image.product_code)[0]
+          item.images.push(product_image.image_url)
+        })
         
         this.setState({
           items: items_res.data
