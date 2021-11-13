@@ -115,12 +115,12 @@ const Navbar = (props) => {
                         {currentUser.username}
                       </MDBDropdownItem></MDBNavLink>
                       <MDBNavLink to="/login" className="nav-link" onClick={logOut}><MDBDropdownItem>
-                        LogOut
+                        Sign Out
                       </MDBDropdownItem></MDBNavLink>
                     </div>
                   ) : (
                     <div>
-                      <MDBNavLink to="/login"><MDBDropdownItem>Sign in</MDBDropdownItem></MDBNavLink>
+                      <MDBNavLink to="/login"><MDBDropdownItem>Sign In</MDBDropdownItem></MDBNavLink>
                       <MDBNavLink to="/register"><MDBDropdownItem>Sign Up</MDBDropdownItem></MDBNavLink>
                     </div>
                   )}
