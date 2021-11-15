@@ -66,7 +66,7 @@ const Login = (props) => {
         <div>
             <Navbar />
             <div className="col-md-12">
-                <div className="card card-container">
+                <div className="card card-container card-login-register">
                     <div className="logo mb-3 ">
                         <div className="col-md-12 text-center">
                             <h1>Login</h1>
@@ -75,7 +75,7 @@ const Login = (props) => {
                     <img
                         src="/assets/image/TheLittle.png"
                         alt="profile-img"
-                        className="profile-img-card"
+                        // className="profile-img-card"
                     />
 
                     <Form onSubmit={handleLogin} ref={form}>

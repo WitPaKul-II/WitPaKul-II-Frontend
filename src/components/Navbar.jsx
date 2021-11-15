@@ -25,6 +25,8 @@ const Navbar = (props) => {
     }
   }
 
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [ShowUsersBoard, setShowUsersBoard] = useState(false);
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
  
@@ -40,6 +42,15 @@ const Navbar = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
+
+    if (currentUser) {
+      setShowUsersBoard(currentUser.user_type.type_name === "Customer");
+      setShowAdminBoard(currentUser.user_type.type_name === "Admin1");
+    } else {
+      setShowAdminBoard(false);
+      setShowUsersBoard(false);
+    }
+
     EventBus.on("logout", () => {
       logOut();
     });
@@ -80,6 +91,13 @@ const Navbar = (props) => {
                   <MDBNavLink to="/shop">SHOP</MDBNavLink>
                 </MDBNavItem>
               </div>
+              {showAdminBoard && (
+              <div>
+                <MDBNavItem>
+                  <MDBNavLink to="/brand">BRAND</MDBNavLink>
+                </MDBNavItem>
+              </div>
+            )}
           </MDBNavbarNav>
           <MDBNavbarNav right>
             {search}
