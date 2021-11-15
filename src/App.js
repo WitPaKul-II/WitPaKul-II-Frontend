@@ -10,6 +10,7 @@ import Profile from './views/Profile';
 import Shop from './views/Shop';
 import UserProduct from './views/UserProduct';
 import Product from './views/Product';
+import Users from './views/Users';
 import Login from './components/Login';
 import Register from './components/Register'
 
@@ -41,6 +42,9 @@ const App = () => {
           )}
           {showAdminBoard && (
             <Route path='/editproduct/*' component={EditProduct} />
+          )}
+          {showAdminBoard && (
+            <Route path='/users' component={Users} />
           )}
           <Route path='/userproduct/*' component={UserProduct} />
           <Route path='/profile' component={Profile} />

@@ -80,6 +80,13 @@ const Navbar = (props) => {
                   <MDBNavLink to="/shop">SHOP</MDBNavLink>
                 </MDBNavItem>
               </div>
+            {currentUser.user_type.type_name === "Admin1" && (
+              <div>
+              <MDBNavItem>
+                <MDBNavLink to="/users">USERS</MDBNavLink>
+              </MDBNavItem>
+              </div>
+            )}
           </MDBNavbarNav>
           <MDBNavbarNav right>
             {search}
