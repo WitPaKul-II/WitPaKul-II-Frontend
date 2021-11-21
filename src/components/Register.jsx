@@ -125,7 +125,7 @@ const Register = (props) => {
         <div>
             <Navbar />
             <div className="col-md-12">
-                <div className="card card-container">
+            <div className="card card-container card-login-register">
                     <div className="logo mb-3 ">
                         <div className="col-md-12 text-center">
                             <h1>Resgister</h1>
