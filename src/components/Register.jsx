@@ -151,7 +151,7 @@ const Register = (props) => {
                                     />
                                 </div>
                                 <div className="form-group labelblock">
-                                    <label htmlFor="firstname">firstname</label>
+                                    <label htmlFor="firstname">Firstname</label>
                                     <Input
                                         type="text"
                                         className="form-control"

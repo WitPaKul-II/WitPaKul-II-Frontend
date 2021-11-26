@@ -27,17 +27,16 @@ const Shop = (props) => {
       props.onChange(event);
     }
   };
-
+  console.log(showAdminBoard, "1234")
   return (
     <div>
       <Navbar search={true} onChange={handleSearchChange} />
       {showAdminBoard && (
         <ProductItems searchText={searchText} />
       )}
-      {ShowUsersBoard && (
+      {!showAdminBoard && (
         <UserProductItems searchText={searchText} />
       )}
-      <UserProductItems searchText={searchText} />
       <Footerbar />
     </div>
   );

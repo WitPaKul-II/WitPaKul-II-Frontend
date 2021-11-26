@@ -2,8 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
-import { MDBBtn, MDBInput } from 'mdbreact';
-import DatePicker from 'react-datepicker';
+import { MDBBtn } from 'mdbreact';
 
 class AddBrand extends Component {
   constructor(props) {

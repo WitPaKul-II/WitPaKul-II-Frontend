@@ -47,9 +47,6 @@ class ProductItems extends Component {
     );
     return (
       <MDBContainer breakpoint="md" >
-        <div className="pt-5 px-5">
-          Search result(s) of "{this.props.searchText}"
-        </div>
         <div className="p-5">
           <section className="text-center mb-4">
             <div className="row wow fadeIn">

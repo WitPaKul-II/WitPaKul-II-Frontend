@@ -16,7 +16,6 @@ import Login from './components/Login';
 import Register from './components/Register'
 import AddBrand from './views/AddBrand';
 import EditBrand from './views/EditBrand';
-import Edit from './views/Edit';
 const App = () => {
   const [ShowUsersBoard, setShowUsersBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -56,11 +55,10 @@ const App = () => {
             <Route path='/addbrand' component={AddBrand} />
           )}
           {showAdminBoard && (
-            <Route path='/editbrand/*' component={EditBrand} />
+            <Route path='/editbrand' component={EditBrand} />
           )}
           <Route path='/userproduct/*' component={UserProduct} />
           <Route path='/profile' component={Profile} />
-          <Route path='/edit' component={Edit} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
         </Switch>

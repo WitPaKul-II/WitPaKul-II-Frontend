@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBIcon } from "mdbreact";
-import { Redirect, Link } from 'react-router-dom';
+
 class Brand extends Component {
   constructor(props) {
     super(props);
@@ -14,20 +14,11 @@ class Brand extends Component {
         "brand_name": "",
       },
     };
-    // this.handleEdit = this.handleEdit.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
   }
-
-  // handleEdit() {
-  //   var { data } = this.state;
-
-  //   window.location.href = "/pros?id=" + data.brand_id;
-  // }
   handleAdd(event) {
-
     window.location.href = "/addbrand";
   }
-
   handleDelete(brand_id) {
     var token = localStorage.getItem("token");
     if (window.confirm('Are you sure you wish to delete ?')) {
@@ -70,8 +61,7 @@ class Brand extends Component {
         <td>{brand.brand_id}</td>
         <td>{brand.brand_name}</td>
         <td>
-          {/* <MDBBtn color="blue" onClick={() => this.handleEdit(brand.brand_id)} >Edit</MDBBtn> */}
-          <MDBBtn color="blue" href={"/edit?id=" + brand.brand_id}>Edit</MDBBtn>
+          <MDBBtn color="blue" href={"/editbrand?id=" + brand.brand_id}>Edit</MDBBtn>
           <MDBBtn color="danger" onClick={() => this.handleDelete(brand.brand_id)}>
             <MDBIcon icon="trash" />
           </MDBBtn>
@@ -83,10 +73,14 @@ class Brand extends Component {
       <div>
         <Navbar />
         <div className="p-5">
-          <section className="text-center mb-4">
-            <div>
-              <h1>BRAND</h1>
-              <MDBBtn color="default" onClick={this.handleAdd} >Add Brand</MDBBtn>
+          <section className="mb-4">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <h1>BRAND</h1>
+              </div>
+              <div class="col-auto">
+                <MDBBtn color="default" onClick={this.handleAdd}>Add Brand</MDBBtn>
+              </div>
             </div>
             <MDBTable striped>
               <MDBTableHead>
