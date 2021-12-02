@@ -11,7 +11,8 @@ class AccountTemplate extends Component {
       imageFileURL: "/assets/image/NoImage.png",
       imageFile: null,
       editUser: {},
-      editFlag: false
+      editFlag: false,
+      error_messages: ""
     };
     this.handleImageFileChange = this.handleImageFileChange.bind(this)
     this.handleEditProfile = this.handleEditProfile.bind(this)
@@ -72,6 +73,28 @@ class AccountTemplate extends Component {
     }
   }
   handleSave() {
+
+    var error_messages = [];
+    if (this.state.editUser.firstname === "") {
+      error_messages.push("Please fill firstname ")
+    }
+    if (this.state.editUser.lastname === "") {
+      error_messages.push("Please fill lastname ")
+    }
+    if (this.state.editUser.email === "") {
+      error_messages.push("Please fill email ")
+    }
+    if (this.state.editUser.tel === "") {
+      error_messages.push("Please fill tel ")
+    }
+    if (this.state.editUser.address === "") {
+      error_messages.push("Please fill address ")
+    }
+    if (error_messages.length !== 0) {
+      this.setState({ error_messages: error_messages })
+      return
+    }
+
     var { editUser, imageFile } = this.state
     var token = localStorage.getItem("token");
     if (imageFile) {
@@ -150,6 +173,15 @@ class AccountTemplate extends Component {
     }
   }
   render() {
+
+    var { error_messages } = this.state;
+    var error_label = (
+      <div></div>
+    )
+    if (error_messages.length !== 0) {
+      error_label = error_messages.map((msg, index) => <div className="alert alert-danger" role="alert">{msg}</div>)
+    }
+
     var { user, editFlag, editUser } = this.state;
     var firstname = (<p className="text-muted mb-0">{user.firstname}</p>)
     var lastname = (<p className="text-muted mb-0">{user.lastname}</p>)
@@ -266,6 +298,7 @@ class AccountTemplate extends Component {
                       </div>
                     </div>
                   </div>
+                  {error_label}
                 </div>
                 <div className="card mb-4">
                   <div className="card-body">
