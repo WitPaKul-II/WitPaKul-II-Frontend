@@ -107,6 +107,13 @@ const Navbar = (props) => {
                 </MDBNavItem>
               </div>
             )}
+            {showAdminBoard && (
+              <div>
+                <MDBNavItem>
+                  <MDBNavLink to="/color">COLOR</MDBNavLink>
+                </MDBNavItem>
+              </div>
+            )}
           </MDBNavbarNav>
           <MDBNavbarNav right>
             {search}
