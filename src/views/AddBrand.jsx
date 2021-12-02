@@ -9,11 +9,10 @@ class AddBrand extends Component {
     super(props);
     this.state = {
       brand_name: "",
-      // mail_name: "",
+      mail_name: "",
       error_messages: ""
     };
     this.handleBrandNameChange = this.handleBrandNameChange.bind(this)
-    // this.handleMailNameChange = this.handleMailNameChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
   }
   handleBrandNameChange(event) {
@@ -21,22 +20,12 @@ class AddBrand extends Component {
     brand_name = event.target.value
     this.setState({ brand_name: brand_name })
   }
-  // handleMailNameChange(event) {
-  //   var { mail_name } = this.state
-  //   mail_name = event.target.value
-  //   this.setState({ mail_name: mail_name })
-  // }
   handleAdd(event) {
-    // var { brand_name, mail_name } = this.state;
     var { brand_name } = this.state;
-
     var error_messages = [];
     if (brand_name === "") {
       error_messages.push("Please fill brand name")
     }
-    // if (mail_name === "") {
-    //   error_messages.push("Please fill email name")
-    // }
     if (error_messages.length !== 0) {
       this.setState({ error_messages: error_messages })
       return
@@ -79,13 +68,7 @@ class AddBrand extends Component {
                 <div className="form-group labelblock">
                   <MDBInput type="textarea" label="NewBrandName" background value={this.state.brand_name}
                     onChange={this.handleBrandNameChange} />
-                  {/* <input
-                    value={this.state.mail_name}
-                    onChange={this.handleMailNameChange}
-                    type="text"
-                    name="MailName"
-                  /> */}
-                  {error_label}
+                    {error_label}
                 </div>
                 <div className="">
                   <MDBBtn color="blue" onClick={this.handleAdd} >Add Brand</MDBBtn>
