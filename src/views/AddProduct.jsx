@@ -201,10 +201,10 @@ class AddProduct extends Component {
   }
   render() {
     var { data, brands } = this.state;
-    var colors = [];
+    var colors_list = [];
 
     for (var i=0; i<data.colors.length; i++) {
-      colors.push(
+      colors_list.push(
         <button
           key={data.colors[i].color_id}
           className={"btn Ripple-parent default"}
@@ -247,7 +247,7 @@ class AddProduct extends Component {
               </div>
               <div className="col-md-6">
                 <div className="mb-1 fw-bolder">
-                  Brand
+                <div className="px-2">Brand</div>
                   {brands_comp}
                 </div>
                 <h3 className="display-5 fw-bolder text-black w-50">
@@ -265,7 +265,7 @@ class AddProduct extends Component {
                 <div className="row d-flex align-items-center m-2 fw-bolder">
                   <div className="mr-4">Colors</div>
                   <div className="row">
-                    {colors}
+                    {colors_list}
                   </div>
                 </div>
                 <div className="fs-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
