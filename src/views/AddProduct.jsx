@@ -292,7 +292,6 @@ class AddProduct extends Component {
             </div>
           </div>
         </section>
-        {this.state.error_messages}
         <Footerbar />
       </div>
     );
