@@ -247,6 +247,7 @@ class AddProduct extends Component {
               </div>
               <div className="col-md-6">
                 <div className="mb-1 fw-bolder">
+                  Brand
                   {brands_comp}
                 </div>
                 <h3 className="display-5 fw-bolder text-black w-50">
