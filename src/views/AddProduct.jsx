@@ -141,13 +141,20 @@ class AddProduct extends Component {
       console.log(error)
     });
   }
-  isActive(color_id, mode) {
+  isActive(color_id) {
     var { selectedColors } = this.state;
-    return ((selectedColors.includes(color_id)) ? 'active border border-success' : 'default');
+    return selectedColors.includes(color_id) ? '2px solid' : '';
   }
   componentDidMount() {
     const brands_url = process.env.REACT_APP_BACKEND + "brands/findAll"
-    axios.get(brands_url).then(res => {
+    var token = localStorage.getItem("token");
+    axios.get(brands_url,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then(res => {
       var { data } = this.state;
       data.brand = res.data[0]
       this.setState({
@@ -157,7 +164,13 @@ class AddProduct extends Component {
     });
 
     const colors_url = process.env.REACT_APP_BACKEND + "colors/findAll"
-    axios.get(colors_url).then(res => {
+    axios.get(colors_url,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then(res => {
       var { data } = this.state;
       data.colors = res.data
       data._manufactured_date = new Date()
@@ -173,11 +186,15 @@ class AddProduct extends Component {
 
     for (var i=0; i<data.colors.length; i++) {
       colors.push(
-        <MDBBtn 
+        <button
           key={data.colors[i].color_id}
-          className={this.isActive(data.colors[i].color_id, "class")}
-          color={data.colors[i].color_name.toLowerCase()} onClick={this.handleColor.bind(this, data.colors[i])}
-        ></MDBBtn>
+          className={"btn Ripple-parent default"}
+          style={{
+              "background-color": data.colors[i].color_code,
+              "outline": this.isActive(data.colors[i].color_id)
+          }}
+          onClick={this.handleColor.bind(this, data.colors[i])}
+        ></button>
       );
     }
     var images_comp = (
@@ -251,17 +268,6 @@ class AddProduct extends Component {
             </div>
           </div>
         </section>
-        [Debug] <br />
-        product_code: {this.state.data.product_code} <br />
-        product_name: {this.state.data.product_name} <br />
-        product_description: {this.state.data.product_description} <br />
-        price: {this.state.data.price} <br />
-        {/* manufactured_date: {this.state.data.manufactured_date} <br /> */}
-        amount: {this.state.data.amount} <br />
-        brand.brand_id: {this.state.data.brand.brand_id} <br />
-        brand.brand_name: {this.state.data.brand.brand_name} <br />
-        colors.length: {this.state.data.colors.length} <br />
-        images: {this.state.data.images} <br />
         <Footerbar />
       </div>
     );
