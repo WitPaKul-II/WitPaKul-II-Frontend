@@ -24,7 +24,8 @@ class AddProduct extends Component {
       imageFileURL: "/assets/image/NoImage.png",
       imageFile: null,
       brands: [],
-      selectedColors: []
+      selectedColors: [],
+      error_messages: []
     };
     this.handleBrandChange = this.handleBrandChange.bind(this)
     this.handleProductCodeChange = this.handleProductCodeChange.bind(this)
@@ -102,7 +103,19 @@ class AddProduct extends Component {
   }
   handleAdd(event) {
     var { data, imageFile, selectedColors } = this.state;
+    data = {...data};
     var token = localStorage.getItem("token");
+    var error_messages = [];
+    if (data.product_code === "") {
+      error_messages.push("Please fill product code")
+    }
+    if (data.product_name === "") {
+      error_messages.push("Please fill product name")
+    }
+    if (error_messages.length !== 0) {
+      this.setState({ error_messages: error_messages })
+      return
+    }
     var colors = []
     for (var i=0; i<data.colors.length; i++) {
       if (selectedColors.indexOf(data.colors[i].color_id) !== -1) {
@@ -133,12 +146,18 @@ class AddProduct extends Component {
         }).then(response => {
           console.log(response)
         }).catch(error => {
+          error_messages.push("Cannot upload image")
+          this.setState({ error_messages: error_messages })
           console.log(error)
+          return
         });
       }
       window.location.href = "/shop";
     }).catch(error => {
+      error_messages.push("Invalid product detail")
+      this.setState({ error_messages: error_messages })
       console.log(error)
+      return
     });
   }
   isActive(color_id) {
@@ -182,10 +201,10 @@ class AddProduct extends Component {
   }
   render() {
     var { data, brands } = this.state;
-    var colors = [];
+    var colors_list = [];
 
     for (var i=0; i<data.colors.length; i++) {
-      colors.push(
+      colors_list.push(
         <button
           key={data.colors[i].color_id}
           className={"btn Ripple-parent default"}
@@ -210,11 +229,13 @@ class AddProduct extends Component {
         </select>
       </div>
     )
-    // if (data.images.length !== 0) {
-    //   images_comp = (
-    //   <img className="card-img-top mb-5 mb-md-0" src={"http://shops.witpakulii.de/backendimages/" + data.images[0].substring(data.images[0].lastIndexOf('/')+1, data.images[0].length)} alt="..." />
-    //   )
-    // }
+    var { error_messages } = this.state;
+    var error_label = (
+      <div></div>
+    )
+    if (error_messages.length !== 0) {
+      error_label = error_messages.map((msg, index) => <div className="alert alert-danger" role="alert">{msg}</div>)
+    }
     return (
       <div>
         <Navbar />
@@ -226,6 +247,7 @@ class AddProduct extends Component {
               </div>
               <div className="col-md-6">
                 <div className="mb-1 fw-bolder">
+                <div className="px-2">Brand</div>
                   {brands_comp}
                 </div>
                 <h3 className="display-5 fw-bolder text-black w-50">
@@ -243,7 +265,7 @@ class AddProduct extends Component {
                 <div className="row d-flex align-items-center m-2 fw-bolder">
                   <div className="mr-4">Colors</div>
                   <div className="row">
-                    {colors}
+                    {colors_list}
                   </div>
                 </div>
                 <div className="fs-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
@@ -259,6 +281,9 @@ class AddProduct extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
+                </div>
+                {error_label}
+                <div className="fs-5 mb-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
                   <button className=" btn btn-primary btn-lg flex-shrink-0" type="button" onClick={this.handleAdd}>
                     <i className="bi-cart-fill me-1"></i>
                     Add
