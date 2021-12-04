@@ -24,7 +24,8 @@ class EditProduct extends Component {
       imageFileURL: "/assets/image/NoImage.png",
       imageFile: null,
       brands: [],
-      selectedColors: []
+      selectedColors: [],
+      error_messages: [],
     };
     this.handleBrandChange = this.handleBrandChange.bind(this)
     this.handleProductNameChange = this.handleProductNameChange.bind(this)
@@ -98,13 +99,24 @@ class EditProduct extends Component {
   handleSave(event) {
     var { data, imageFile, selectedColors } = this.state;
     var token = localStorage.getItem("token");
+    var error_messages = [];
+    if (data.product_code === "") {
+      error_messages.push("Please fill product code")
+    }
+    if (data.product_name === "") {
+      error_messages.push("Please fill product name")
+    }
+    if (error_messages.length !== 0) {
+      this.setState({ error_messages: error_messages })
+      return
+    }
     var colors = []
     for (var i=0; i<data.colors.length; i++) {
       if (selectedColors.indexOf(data.colors[i].color_id) !== -1) {
         colors.push(data.colors[i])
       }
     }
-    data.colors = colors;   
+    data.colors = colors;
     axios.put(
       process.env.REACT_APP_BACKEND + "edit", 
       JSON.stringify(data), 
@@ -126,14 +138,18 @@ class EditProduct extends Component {
             'filename': data.product_code + "-" + (new Date()).getTime()
           }
         }).then(response => {
+          error_messages.push("Cannot upload image")
           console.log(response)
+          return
         }).catch(error => {
           console.log(error)
         });
       }
       window.location.href = "/product/" + data.product_code;
     }).catch(error => {
+      error_messages.push("Invalid product detail")
       console.log(error)
+      return
     });
   }
   handleCancel(event) {
@@ -255,6 +271,13 @@ class EditProduct extends Component {
         </select>
       </div>
     )
+    var { error_messages } = this.state;
+    var error_label = (
+      <div></div>
+    )
+    if (error_messages.length !== 0) {
+      error_label = error_messages.map((msg, index) => <div className="alert alert-danger" role="alert">{msg}</div>)
+    }
     return (
       <div>
         <Navbar />
@@ -299,6 +322,7 @@ class EditProduct extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
+                  {error_label}
                   <MDBBtn color="default" onClick={this.handleSave} >
                     Save
                   </MDBBtn>
@@ -310,17 +334,6 @@ class EditProduct extends Component {
             </div>
           </div>
         </section>
-        [Debug] <br />
-        product_code: {this.state.data.product_code} <br />
-        product_name: {this.state.data.product_name} <br />
-        product_description: {this.state.data.product_description} <br />
-        price: {this.state.data.price} <br />
-        {/* manufactured_date: {this.state.data.manufactured_date} <br /> */}
-        amount: {this.state.data.amount} <br />
-        brand.brand_id: {this.state.data.brand.brand_id} <br />
-        brand.brand_name: {this.state.data.brand.brand_name} <br />
-        colors.length: {this.state.data.colors.length} <br />
-        images: {this.state.data.images} <br />
         <Footerbar />
       </div>
     );
