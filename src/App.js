@@ -70,7 +70,9 @@ const App = () => {
             <Route path='/editcolor' component={EditColor} />
           )}
           <Route path='/userproduct/*' component={UserProduct} />
-          <Route path='/profile' component={Profile} />
+          {(showAdminBoard || ShowUsersBoard) && (
+            <Route path='/profile' component={Profile} />
+          )}
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
         </Switch>
