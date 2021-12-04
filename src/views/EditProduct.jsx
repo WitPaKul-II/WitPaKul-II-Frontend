@@ -142,18 +142,31 @@ class EditProduct extends Component {
   }
   isActive(color_id, mode) {
     var { selectedColors } = this.state;
-    return ((selectedColors.includes(color_id)) ? 'active border border-success' : 'default');
+    return ((selectedColors.includes(color_id)) ? '2px solid' : '');
   }
   componentDidMount() {
     const url = process.env.REACT_APP_BACKEND + 'productcode/' + this.props.match.params[0];
-    axios.get(url).then(product_res => {
+    var token = localStorage.getItem("token");
+    axios.get(url,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then(product_res => {
       var selectedColors = []
       for (var i = 0; i < product_res.data.colors.length; i++) {
         selectedColors.push(product_res.data.colors[i].color_id);
       }
 
       const product_images_url = process.env.REACT_APP_BACKEND + 'productImages/findAll/';
-      axios.get(product_images_url).then(product_images_res => {
+      axios.get(product_images_url,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(product_images_res => {
         // Set product code to string
         for (var i = 0; i < product_images_res.data.length; i++) {
           product_images_res.data[i].product_code = product_images_res.data[i].product_code.product_code
@@ -170,7 +183,13 @@ class EditProduct extends Component {
         }
 
         const colors_url = process.env.REACT_APP_BACKEND + "colors/findAll"
-        axios.get(colors_url).then(colors_res => {
+        axios.get(colors_url,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            }
+          }).then(colors_res => {
           var data = product_res.data;
           data.colors = colors_res.data
           data._manufactured_date = new Date()
@@ -186,7 +205,13 @@ class EditProduct extends Component {
     });
 
     const brands_url = process.env.REACT_APP_BACKEND + "brands/findAll"
-    axios.get(brands_url).then(res => {
+    axios.get(brands_url,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then(res => {
       var { data } = this.state;
       data.brand = res.data[0]
       this.setState({
@@ -201,11 +226,20 @@ class EditProduct extends Component {
 
     for (var i=0; i<data.colors.length; i++) {
       colors.push(
-        <MDBBtn 
+        // <MDBBtn 
+        //   key={data.colors[i].color_id}
+        //   className={this.isActive(data.colors[i].color_id, "class")}
+        //   color={data.colors[i].color_name.toLowerCase()} onClick={this.handleColor.bind(this, data.colors[i])}
+        // ></MDBBtn>
+        <button
           key={data.colors[i].color_id}
-          className={this.isActive(data.colors[i].color_id, "class")}
-          color={data.colors[i].color_name.toLowerCase()} onClick={this.handleColor.bind(this, data.colors[i])}
-        ></MDBBtn>
+          className={"btn Ripple-parent default"}
+          style={{
+              "background-color": data.colors[i].color_code,
+              "outline": this.isActive(data.colors[i].color_id)
+          }}
+          onClick={this.handleColor.bind(this, data.colors[i])}
+        ></button>
       );
     }
     var images_comp = (

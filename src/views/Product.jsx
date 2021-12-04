@@ -91,7 +91,7 @@ class Product extends Component {
   }
   isActive(color_name) {
     var { selectedColors } = this.state;
-    return ((selectedColors[color_name]) ? 'active' : 'default');
+    return ((selectedColors[color_name]) ? '2px solid' : '');
   }
   render() {
     var { data } = this.state;
@@ -99,11 +99,15 @@ class Product extends Component {
 
     for (var i = 0; i < data.colors.length; i++) {
       colors.push(
-        <MDBBtn
+        <button
           key={data.colors[i].color_id}
-          className={this.isActive(data.colors[i].color_name)}
-          color={data.colors[i].color_name.toLowerCase()} onClick={this.handleColor.bind(this, data.colors[i])}
-        ></MDBBtn>
+          className={"btn Ripple-parent default"}
+          style={{
+              "background-color": data.colors[i].color_code,
+              "outline": this.isActive(data.colors[i].color_name)
+          }}
+          onClick={this.handleColor.bind(this, data.colors[i])}
+        ></button>
       );
     }
 
