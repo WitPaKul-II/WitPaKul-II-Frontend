@@ -93,10 +93,10 @@ class UserProduct extends Component {
   }
   render() {
     var { data } = this.state;
-    var colors = [];
+    var colors_list = [];
 
     for (var i = 0; i < data.colors.length; i++) {
-      colors.push(
+      colors_list.push(
         <button
           key={data.colors[i].color_id}
           className={"btn Ripple-parent default"}
@@ -107,6 +107,17 @@ class UserProduct extends Component {
           onClick={this.handleColor.bind(this, data.colors[i])}
         ></button>
       );
+    }
+    var colors = (<div></div>)
+    if (colors_list.length !== 0) {
+      colors = (
+      <div className="row d-flex align-items-center m-2 fw-bolder">
+        <div className="mr-4">Colors</div>
+        <div className="row">
+          {colors_list}
+        </div>
+      </div>
+      )
     }
 
     var images_comp = (
@@ -135,12 +146,7 @@ class UserProduct extends Component {
                 <p className="lead">
                   {data.product_description}
                 </p>
-                <div className="row d-flex align-items-center m-2 fw-bolder">
-                  <div className="mr-4">Colors</div>
-                  <div className="row">
-                    {colors}
-                  </div>
-                </div>
+                {colors}
                 <div className="fs-5 mb-5 fw-bolder text-warning">
                   <div className="float-left">
                     <h4 className="font-weight-bold blue-text">

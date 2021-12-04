@@ -322,7 +322,9 @@ class EditProduct extends Component {
                       <MDBInput type="number" label="Amount" background size="lg" value={this.state.data.amount} onChange={this.handleAmountChange} />
                     </strong>
                   </h4>
-                  {error_label}
+                </div>
+                {error_label}
+                <div className="fs-5 mb-5 d-flex align-items-center fw-bolder text-warning justify-content-between ">
                   <MDBBtn color="default" onClick={this.handleSave} >
                     Save
                   </MDBBtn>
