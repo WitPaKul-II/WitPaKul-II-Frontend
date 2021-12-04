@@ -11,6 +11,8 @@ import { history } from "../store/helpers/history";
 
 const Navbar = (props) => {
 
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [ShowUsersBoard, setShowUsersBoard] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +29,7 @@ const Navbar = (props) => {
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     history.listen((location) => {
       // clear message when changing location
@@ -40,6 +42,15 @@ const Navbar = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
+
+    if (currentUser) {
+      setShowUsersBoard(currentUser.user_type.type_name === "Customer");
+      setShowAdminBoard(currentUser.user_type.type_name === "Admin1");
+    } else {
+      setShowAdminBoard(false);
+      setShowUsersBoard(false);
+    }
+
     EventBus.on("logout", () => {
       logOut();
     });
@@ -48,7 +59,7 @@ const Navbar = (props) => {
       EventBus.remove("logout");
     };
   }, [currentUser, logOut]);
- 
+
   var search = <div />
   if (props.search) {
     search = (
@@ -75,16 +86,25 @@ const Navbar = (props) => {
             <MDBNavItem>
               <MDBNavLink to="/team">TEAM</MDBNavLink>
             </MDBNavItem>
+            <div>
+              <MDBNavItem>
+                <MDBNavLink to="/shop">SHOP</MDBNavLink>
+              </MDBNavItem>
+            </div>
+            {/* {currentUser.user_type.type_name === "Admin1" && ( */}
+            {showAdminBoard && (
               <div>
                 <MDBNavItem>
-                  <MDBNavLink to="/shop">SHOP</MDBNavLink>
+                  <MDBNavLink to="/users">USERS</MDBNavLink>
                 </MDBNavItem>
               </div>
-            {currentUser.user_type.type_name === "Admin1" && (
+            )}
+            {/* )} */}
+            {showAdminBoard && (
               <div>
-              <MDBNavItem>
-                <MDBNavLink to="/users">USERS</MDBNavLink>
-              </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink to="/brand">BRAND</MDBNavLink>
+                </MDBNavItem>
               </div>
             )}
           </MDBNavbarNav>
