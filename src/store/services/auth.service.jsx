@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_PRODUCTION_BACKEND;
-
 const register = (username, email, password, firstname, lastname, type_id) => {
   console.log(type_id)
-  return axios.post(API_URL + "register", {
+  return axios.post(process.env.REACT_APP_BACKEND + "register", {
     username: username,
     firstname: firstname,
     lastname: lastname,
@@ -15,13 +13,13 @@ const register = (username, email, password, firstname, lastname, type_id) => {
 };
 
 const login = (username, password) => {
-  return axios.post(API_URL + "login", {
+  return axios.post(process.env.REACT_APP_BACKEND + "login", {
     username,
     password,
   }).then((response_token) => {
     console.log("token", JSON.stringify(response_token.data, null, 2));
     if (response_token.data.access_token) {
-      axios.get(API_URL + "me", {
+      axios.get(process.env.REACT_APP_BACKEND + "me", {
         headers: {
           Authorization: `Bearer ${response_token.data.access_token}`,
         }
