@@ -148,9 +148,9 @@ class UserProduct extends Component {
                     </h4>
                   </div>
                   <div className="float-right">
-                    <MDBBtn color="default">
+                    {/* <MDBBtn color="default">
                       Add to cart
-                    </MDBBtn>
+                    </MDBBtn> */}
                   </div>
                 </div>
               </div>

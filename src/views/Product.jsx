@@ -158,9 +158,9 @@ class Product extends Component {
                     <MDBBtn color="light" onClick={this.handleEdit} >
                       <MDBIcon icon="marker" />
                     </MDBBtn>
-                    <MDBBtn color="default">
+                    {/* <MDBBtn color="default">
                       Add to cart
-                    </MDBBtn>
+                    </MDBBtn> */}
                   </div>
                 </div>
               </div>

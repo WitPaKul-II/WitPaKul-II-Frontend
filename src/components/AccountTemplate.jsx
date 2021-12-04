@@ -213,6 +213,7 @@ class AccountTemplate extends Component {
         <div className="d-flex justify-content-center mb-2">
           <MDBInput type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onChange={this.handleImageFileChange} />
         </div>
+          {error_label}
         <div className="d-flex justify-content-center mb-2">
           <MDBBtn color="default" onClick={this.handleSave} >
             <MDBIcon icon="save" /> Save
@@ -298,7 +299,6 @@ class AccountTemplate extends Component {
                       </div>
                     </div>
                   </div>
-                  {error_label}
                 </div>
                 <div className="card mb-4">
                   <div className="card-body">

@@ -33,7 +33,10 @@ class EditColor extends Component {
   }
   handleSave(event) {
     var token = localStorage.getItem("token");  
-    console.log(JSON.stringify(this.state.color))
+    if (this.state.color.color_name === "" || this.state.color.color_code === "") {
+      this.setState({ "error_message": "Invalid value" })
+      return
+    }
     axios.put(
       process.env.REACT_APP_BACKEND + "colors/edit", 
       JSON.stringify(this.state.color), 
