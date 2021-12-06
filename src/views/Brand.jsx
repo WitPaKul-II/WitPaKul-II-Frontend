@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footerbar from '../components/Footerbar';
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBIcon } from "mdbreact";
 
+
 class Brand extends Component {
   constructor(props) {
     super(props);
