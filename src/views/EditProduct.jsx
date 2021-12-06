@@ -217,11 +217,19 @@ class EditProduct extends Component {
           data._manufactured_date = new Date()
           data.manufactured_date = data._manufactured_date.toISOString().split("T")[0]
 
-          this.setState({
-            data: data,
-            imageFileURL: process.env.REACT_APP_BACKEND + 'images/' + data.images[data.images.length-1],
-            selectedColors: selectedColors
-          });
+          if (data.images[data.images.length-1]) {
+            this.setState({
+              data: data,
+              imageFileURL: process.env.REACT_APP_BACKEND + 'images/' + data.images[data.images.length-1],
+              selectedColors: selectedColors
+            });
+          }
+          else {
+            this.setState({
+              data: data,
+              selectedColors: selectedColors
+            });
+          }
         });
       });
     });
