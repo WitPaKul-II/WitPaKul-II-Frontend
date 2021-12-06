@@ -145,19 +145,23 @@ class AddProduct extends Component {
           }
         }).then(response => {
           console.log(response)
+          window.location.href = "/shop";
         }).catch(error => {
           error_messages.push("Cannot upload image")
-          this.setState({ error_messages: error_messages })
           console.log(error)
-          return
+          if (error_messages.length !== 0) {
+            this.setState({ error_messages: error_messages })
+            return
+          }
         });
       }
-      window.location.href = "/shop";
     }).catch(error => {
       error_messages.push("Invalid product detail")
-      this.setState({ error_messages: error_messages })
       console.log(error)
-      return
+      if (error_messages.length !== 0) {
+        this.setState({ error_messages: error_messages })
+        return
+      }
     });
   }
   isActive(color_id) {
