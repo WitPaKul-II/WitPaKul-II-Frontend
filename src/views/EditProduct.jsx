@@ -138,18 +138,24 @@ class EditProduct extends Component {
             'filename': data.product_code + "-" + (new Date()).getTime()
           }
         }).then(response => {
-          error_messages.push("Cannot upload image")
           console.log(response)
-          return
+          window.location.href = "/product/" + data.product_code;
         }).catch(error => {
+          error_messages.push("Cannot upload image")
           console.log(error)
+          if (error_messages.length !== 0) {
+            this.setState({ error_messages: error_messages })
+            return
+          }
         });
       }
-      window.location.href = "/product/" + data.product_code;
     }).catch(error => {
       error_messages.push("Invalid product detail")
       console.log(error)
-      return
+      if (error_messages.length !== 0) {
+        this.setState({ error_messages: error_messages })
+        return
+      }
     });
   }
   handleCancel(event) {
