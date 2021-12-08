@@ -120,13 +120,13 @@ const Navbar = (props) => {
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <MDBIcon icon="user" />
+                  <MDBIcon icon="user" /> {currentUser ? ( <a>{currentUser.username}</a> ) : ( <a></a> )}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu right className="dropdown-default">
                   {currentUser ? (
                     <div >
                       <MDBNavLink to="/profile" className="nav-link"><MDBDropdownItem>
-                        {currentUser.username}
+                        Profile
                       </MDBDropdownItem></MDBNavLink>
                       <MDBNavLink to="/login" className="nav-link" onClick={logOut}><MDBDropdownItem>
                         Sign Out
@@ -138,7 +138,6 @@ const Navbar = (props) => {
                       <MDBNavLink to="/register"><MDBDropdownItem>Sign Up</MDBDropdownItem></MDBNavLink>
                     </div>
                   )}
-                  <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
