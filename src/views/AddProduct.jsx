@@ -155,6 +155,10 @@ class AddProduct extends Component {
           }
         });
       }
+      else {
+        console.log(response)
+        window.location.href = "/shop";
+      }
     }).catch(error => {
       error_messages.push("Invalid product detail")
       console.log(error)
