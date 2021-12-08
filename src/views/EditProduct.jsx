@@ -149,6 +149,10 @@ class EditProduct extends Component {
           }
         });
       }
+      else {
+        console.log(response)
+        window.location.href = "/product/" + data.product_code;
+      }
     }).catch(error => {
       error_messages.push("Invalid product detail")
       console.log(error)
